@@ -83,7 +83,7 @@ router.post("/hero/:name", (req, res) => {
     // console.log("values:", values);
     // console.log("entries:", entries);
 
-    // creating the hero entry into our hero_db using `connection`
+    // Need to put this `hero` into renderHero() for when add to universe is clicked
     db.Hero.create({
       name: heroName,
       hero_id: parseInt(hero_id),
