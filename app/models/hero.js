@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
     durability: DataTypes.INTEGER,
     power: DataTypes.INTEGER,
     combat: DataTypes.INTEGER,
-    total_power: DataTypes.INTEGER,
+    totalPower: DataTypes.INTEGER,
     alignment: DataTypes.STRING,
     img_url: DataTypes.STRING,
   });
