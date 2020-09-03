@@ -9,7 +9,7 @@ Values
     ("Lex Luthor", 405, 100, 53, 25, 65, 68, 70, 381, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/727.jpg"), 
     ("Doctor Doom", 222, 100, 32, 20, 100, 100, 84, 436, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/189.jpg"), 
     ("Mister Freeze", 457, 75, 32, 12, 70, 37, 28, 254, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/742.jpg"),
-    ("Juggernaut", 405, 44, 100, 42, 100, 85, 70, 441, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/826.jpg"), 
+    ("Juggernaut", 374, 44, 100, 42, 100, 85, 70, 441, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/826.jpg"), 
     ("Abomination", 4, 63, 80, 53, 90, 62, 95, 443, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/1.jpg"), 
     ("Doomsday", 230, 75, 100, 67, 100, 100, 90, 532, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/679.jpg"),
     ("Professor Zoom", 528, 94, 10, 100, 20, 83, 20, 317, "bad", "https://www.superherodb.com/pictures2/portraits/10/100/766.jpg"), 
