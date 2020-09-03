@@ -2,7 +2,7 @@ $(document).ready(() => {
   $("#searchBtn").on("click", (event) => {
     event.preventDefault();
     var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
-    console.log("supeName:", supeName);
+    // console.log("supeName:", supeName);
     var superFinal = "";
 
     if (supeName.length === 1) {
@@ -12,7 +12,7 @@ $(document).ready(() => {
     } else if (supeName.length === 3) {
       superFinal += supeName[0] + "%20" + supeName[1] + "%20" + supeName[2];
     }
-    console.log("superFinal: ", superFinal);
+    // console.log("superFinal: ", superFinal);
     getSuperHero(superFinal);
 
     function getSuperHero(superFinal) {
@@ -22,13 +22,8 @@ $(document).ready(() => {
         url: baseUrl + superFinal,
         method: "GET",
       }).then(function (results) {
-        // console.log("ADDING NEW HERO");
-        console.log("HERO RESULTS: ", results);
+        // console.log("HERO RESULTS: ", results);
         function renderHero() {
-          // Empty the card each time a search btn is clicked
-          // $("#addHero").remove();
-          // append information to heroResults
-
           // grabbing informatoin based on search results
           let hero_name = results[0].name;
           let alignment = results[0].biography.alignment;
@@ -58,41 +53,9 @@ $(document).ready(() => {
         }
         renderHero();
       });
-
-      // $.ajax({
-      //   url: baseUrl + superFinal,
-      //   method: "GET",
-      // }).then(function (data) {
-      //   //check if a hero is already in our database, if so
-      //   //pull that hero from our database and desiplay to user
-      //   if(data === null) {
-      //     console.log("No record, create new HERO")
-      //     $.ajax({
-      //       url: baseUrl + superFinal,
-      //       method: "POST",
-      //     }).then(function (results) {
-      //       console.log("ADDING NEW HERO");
-      //       console.log("NEW HERO RESULTS: ", results);
-      //     });
-      //   }
-      //   //If our hero is not in our database yet, add them and then
-      //   //display their data to the user
-      //   else{
-      //     console.log("Our backend data: ", data);
-      //   }
-
-      // });
     }
-
-    //   $.ajax({
-    //     url: baseUrl + superFinal,
-    //     method: "POST",
-    //   }).then(function (err, res) {
-    //     if (err) throw err;
-    //     console.log("res, ", res);
-    //   });
-    // }
   });
+  // post route to post the choosen hero our heros table
   $("#addHero").on("click", (event) => {
     event.preventDefault();
     $.post("/api/hero/:name").then(function () {
