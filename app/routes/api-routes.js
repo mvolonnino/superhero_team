@@ -28,7 +28,7 @@ router.post("/signup", (req, res) => {
 });
 
 router.get("/user_data", (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   if (!req.user) {
     // The user is not logged in, send back an empty object
     res.json({});
