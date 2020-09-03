@@ -74,6 +74,7 @@ $(document).ready(() => {
   // post route to post the choosen hero our heros table
   $("#addHero").on("click", (event) => {
     event.preventDefault();
+    $("#addedHero").remove();
     var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
     console.log("supeName:", supeName);
     var superFinal = "";
