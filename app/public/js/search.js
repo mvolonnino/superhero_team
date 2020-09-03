@@ -28,7 +28,12 @@ $(document).ready(() => {
         url: baseUrl + superFinal,
         method: "GET",
       }).then(function (results) {
-        // console.log("HERO RESULTS: ", results);
+        console.log("HERO RESULTS: ", results);
+        if (results.type === "error") {
+          console.log("Hero does not exist in this univers's source");
+        } else {
+          renderHero();
+        }
         function renderHero() {
           // grabbing informatoin based on search results
           let hero_name = results[0].name;
@@ -57,7 +62,6 @@ $(document).ready(() => {
           let addHero = $("#addHero");
           addHero.addClass("d-block");
         }
-        renderHero();
       });
     }
   });
@@ -77,14 +81,16 @@ $(document).ready(() => {
     }
     var baseUrl = "http://localhost:8080/api/hero/";
 
-    $.ajax({
-      url: baseUrl + superFinal,
-      method: "GET",
-    }).then(function (results) {
-      console.log("results: ", results);
-      $.post("/api/hero/" + superFinal, results).then(function () {
-        console.log("data: ");
-      });
+    // // $.ajax({
+    // //   url: baseUrl + superFinal,
+    // //   method: "GET",
+    // // })
+    // .then(function (results) {
+    // console.log("results: ", results);
+    $.post("/api/hero/" + superFinal).then(function (response) {
+      console.log("response: ", response);
+      let addedHero = $("<div>");
     });
+    // });
   });
 });
