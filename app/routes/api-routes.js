@@ -4,7 +4,22 @@ const connection = require("../config/connectmySQL");
 const db = require("../models");
 const passport = require("../config/passport.js");
 
-// routes for our user_db===================================================================================
+// routes for our heros table==================================================================================
+router.get("/hero_data", (req, res) => {
+  //receive call from front-end, enter database and grab all hero data
+  db.Hero.findAll({}).then((allHeroes) => {
+    res.json(allHeroes);
+  });
+});
+
+router.get("/villain_data", (req, res) => {
+  //receive call from front-end, enter database and grab all hero data
+  db.Villain.findAll({}).then((allVillains) => {
+    res.json(allVillains);
+  });
+});
+
+// routes for our user table===================================================================================
 router.post("/login", passport.authenticate("local"), (req, res) => {
   console.log("post /api/login");
   res.json({
