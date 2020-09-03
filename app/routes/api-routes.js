@@ -51,7 +51,7 @@ router.get("/logout", (req, res) => {
 
 // routes for superhero api database=====================================================================
 router.get("/hero/:name", (req, res) => {
-  console.log("get /api/hero/:name");
+  console.log("get /api/hero/" + req.params.name);
   var baseUrl = "http://superheroapi.com/api/";
   var volonnninoToken = "10223684788131570";
   var searchParam = "/search/" + req.params.name;
@@ -104,11 +104,8 @@ router.get("/hero/:name", (req, res) => {
 });
 
 router.post("/hero/:name", (req, res) => {
-  console.log("post /api/hero/:name");
+  console.log("post /api/hero/" + req.params.name);
   console.log("=========================================");
-  // console.log("hero_id ", hero_id);
-
-  console.log("name: ");
   var baseUrl = "http://superheroapi.com/api/";
   var volonnninoToken = "10223684788131570";
   var searchParam = "/search/" + req.params.name;

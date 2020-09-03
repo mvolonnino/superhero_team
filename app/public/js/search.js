@@ -7,6 +7,7 @@ $(document).ready(() => {
 
   $("#searchBtn").on("click", (event) => {
     event.preventDefault();
+    $("#addedHero").remove();
     var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
     // console.log("supeName:", supeName);
     var superFinal = "";
@@ -32,7 +33,9 @@ $(document).ready(() => {
         if (results.type === "error") {
           console.log("Hero does not exist in this universe's source");
           $("#heroResultsCol").hide();
-          alert("Hero not found in the universe's source! Check Spelling and search again")
+          alert(
+            "Hero not found in the universe's source! Check spelling or search again."
+          );
         } else {
           renderHero();
           $("#heroResultsCol").show();
@@ -84,7 +87,23 @@ $(document).ready(() => {
     }
     $.post("/api/hero/" + superFinal).then(function (response) {
       console.log("response: ", response);
-      let addedHero = $("<div>");
+      if (response.message === "Hero has been added to your universe!") {
+        var addedHeroDiv = $("<div>");
+        addedHeroDiv.attr("id", "addedHero");
+        $("#heroResultsCol").append(addedHeroDiv);
+        var addedHeroP = $("<p>");
+        addedHeroP.text("Hero has been added to your universe!");
+        addedHeroP.attr("style", "color:green");
+        addedHeroDiv.append(addedHeroP);
+      } else {
+        var addedHeroDiv = $("<div>");
+        addedHeroDiv.attr("id", "addedHero");
+        $("#heroResultsCol").append(addedHeroDiv);
+        var addedHeroP = $("<p>");
+        addedHeroP.text("Hero already exists in your universe!");
+        addedHeroP.attr("style", "color:red");
+        addedHeroDiv.append(addedHeroP);
+      }
     });
   });
 });
