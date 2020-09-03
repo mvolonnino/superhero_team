@@ -95,8 +95,8 @@ $(document).ready(() => {
   });
   $("#addHero").on("click", (event) => {
     event.preventDefault();
-    $.post("/api/hero/:name", results).then(function (data) {
-      console.log("data: ", data);
+    $.post("/api/hero/:name").then(function () {
+      console.log("data: ");
     });
   });
 });

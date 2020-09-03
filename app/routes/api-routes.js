@@ -44,7 +44,7 @@ router.get("/user_data", (req, res) => {
 //   // findAll returns all entries for a table when used with no options
 //   console.log("PUSH DATA TO HERO PAGE");
 //   db.Hero.findOne({
-//     where: 
+//     where:
 //       {name: req.params.name}
 //   }).then(function(answers) {
 //     // We have access to the todos as an argument inside of the callback function
@@ -55,9 +55,8 @@ router.get("/user_data", (req, res) => {
 
 // routes for superhero api database=====================================================================
 
-
 router.get("/hero/:name", (req, res) => {
-  console.log("post /api/hero/:name");
+  console.log("get /api/hero/:name");
   var baseUrl = "http://superheroapi.com/api/";
   var volonnninoToken = "10223684788131570";
   var searchParam = "/search/" + req.params.name;
@@ -68,9 +67,8 @@ router.get("/hero/:name", (req, res) => {
     if (error || response.statusCode !== 200) {
       return res.statusCode(500).json({ type: "error", message: err.message });
     }
-  
-    body = JSON.parse(body);
 
+    body = JSON.parse(body);
 
     var results = body.results.filter((hero) => {
       return hero.name.toLowerCase() === req.params.name.toLowerCase();
@@ -95,33 +93,28 @@ router.get("/hero/:name", (req, res) => {
     for (var i = 0; i < values.length; i++) {
       total_power += parseInt(values[i]);
     }
-    // console.log("total_power:", total_power);
-    // console.log("values: ", values);
-    // console.log("keys:", keys);
-    // console.log("values:", values);
-    // console.log("entries:", entries);
-
-    // Need to put this `hero` into renderHero() for when add to universe is clicked
-    // db.Hero.create({
-    //   name: heroName,
-    //   hero_id: parseInt(hero_id),
-    //   intel: parseInt(results[0].powerstats.intelligence),
-    //   strength: parseInt(results[0].powerstats.strength),
-    //   speed: parseInt(results[0].powerstats.speed),
-    //   durability: parseInt(results[0].powerstats.durability),
-    //   power: parseInt(results[0].powerstats.power),
-    //   combat: parseInt(results[0].powerstats.combat),
-    //   total_power: total_power,
-    //   alignment: alignment,
-    //   img_url: imageURL,
-    // }).then(() => {
-    //   var query = "SELECT * FROM Heros";
-    //   connection.query(query, function (err, res) {
-    //     if (err) throw err;
-    //     console.log("you are a fuckin boss");
-    //     console.table(res);
-    //   });
-    // });
+    router.post("/hero/:name", (req, res) => {
+      console.log("post /api/hero/:name");
+      db.Hero.create({
+        name: heroName,
+        hero_id: parseInt(hero_id),
+        intel: parseInt(results[0].powerstats.intelligence),
+        strength: parseInt(results[0].powerstats.strength),
+        speed: parseInt(results[0].powerstats.speed),
+        durability: parseInt(results[0].powerstats.durability),
+        power: parseInt(results[0].powerstats.power),
+        combat: parseInt(results[0].powerstats.combat),
+        total_power: total_power,
+        alignment: alignment,
+        img_url: imageURL,
+      }).then(() => {
+        var query = "SELECT * FROM Heros";
+        connection.query(query, function (err, res) {
+          if (err) throw err;
+          console.table(res);
+        });
+      });
+    });
   });
 });
 
