@@ -44,6 +44,7 @@ router.get("/user_data", (req, res) => {
 
 // Route for logging user out
 router.get("/logout", (req, res) => {
+  console.log("Logout");
   req.logout();
   res.redirect("/");
 });
@@ -58,19 +59,24 @@ router.get("/hero/:name", (req, res) => {
   console.log("supeheroQuery: ", superheroQuery);
 
   request({ url: superheroQuery }, (error, response, body) => {
-    if (error || response.statusCode !== 200) {
-      return res.statusCode(500).json({ type: "error", message: err.message });
-    }
+    // if (error || response.status !== 200) {
+    //   return res.status(500).json({ type: "error", message: err.message });
+    // }
 
     body = JSON.parse(body);
 
     if (body.results === undefined) {
       console.log("==================================================");
-      return;
+      console.log("Error!! Superhero does not exist");
+      return res.json({
+        type: "error",
+        message: "Hero does not exist in this universe's source",
+      });
     }
     var results = body.results.filter((hero) => {
       return hero.name.toLowerCase() === req.params.name.toLowerCase();
     });
+    // console.log("**********results: ", results);
     // grabbing information on the hero searched
     res.json(results);
 
@@ -92,6 +98,9 @@ router.get("/hero/:name", (req, res) => {
       total_power += parseInt(values[i]);
     }
   });
+  // .catch(function (error) {
+  // console.log("SUPERHERO DOES NOT EXIST: ", error);
+  // });
 });
 
 router.post("/hero/:name", (req, res) => {
@@ -107,21 +116,27 @@ router.post("/hero/:name", (req, res) => {
   console.log("supeheroQuery: ", superheroQuery);
 
   request({ url: superheroQuery }, (error, response, body) => {
-    if (error || response.statusCode !== 200) {
-      return res.statusCode(500).json({ type: "error", message: err.message });
-    }
+    // if (error || response.status !== 200) {
+    //   return res.status(500).json({ type: "error", message: err.message });
+    // }
 
     body = JSON.parse(body);
+    console.log("========================================");
+    console.log("response: ", body);
 
     if (body.results === undefined) {
       console.log("==================================================");
-      return;
+      console.log("Error!! Superhero does not exist");
+      return res.json({
+        type: "error",
+        message: "Hero does not exist in this universe's source",
+      });
     }
     var results = body.results.filter((hero) => {
       return hero.name.toLowerCase() === req.params.name.toLowerCase();
     });
     // grabbing information on the hero searched
-    res.json(results);
+    // res.json(results);
 
     console.log("hero: ", results);
     var heroName = results[0].name;
@@ -165,9 +180,12 @@ router.post("/hero/:name", (req, res) => {
             if (err) throw err;
             console.table(res);
           });
+          res.json({ message: "Hero has been added to your universe!" });
         });
       } else {
+        console.log("==================================================");
         console.log("Hero is already in database");
+        res.json({ message: "Hero already exists in your universe!" });
       }
     });
   });

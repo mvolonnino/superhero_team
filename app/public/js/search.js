@@ -28,7 +28,15 @@ $(document).ready(() => {
         url: baseUrl + superFinal,
         method: "GET",
       }).then(function (results) {
-        // console.log("HERO RESULTS: ", results);
+        console.log("HERO RESULTS: ", results);
+        if (results.type === "error") {
+          console.log("Hero does not exist in this universe's source");
+          $("#heroResultsCol").hide();
+          alert("Hero not found in the universe's source! Check Spelling and search again")
+        } else {
+          renderHero();
+          $("#heroResultsCol").show();
+        }
         function renderHero() {
           // grabbing informatoin based on search results
           let hero_name = results[0].name;
@@ -57,7 +65,6 @@ $(document).ready(() => {
           let addHero = $("#addHero");
           addHero.addClass("d-block");
         }
-        renderHero();
       });
     }
   });
@@ -75,16 +82,9 @@ $(document).ready(() => {
     } else if (supeName.length === 3) {
       superFinal += supeName[0] + "%20" + supeName[1] + "%20" + supeName[2];
     }
-    var baseUrl = "http://localhost:8080/api/hero/";
-
-    $.ajax({
-      url: baseUrl + superFinal,
-      method: "GET",
-    }).then(function (results) {
-      console.log("results: ", results);
-      $.post("/api/hero/" + superFinal, results).then(function () {
-        console.log("data: ");
-      });
+    $.post("/api/hero/" + superFinal).then(function (response) {
+      console.log("response: ", response);
+      let addedHero = $("<div>");
     });
   });
 });
