@@ -79,14 +79,6 @@ $(document).ready(() => {
     } else if (supeName.length === 3) {
       superFinal += supeName[0] + "%20" + supeName[1] + "%20" + supeName[2];
     }
-    var baseUrl = "http://localhost:8080/api/hero/";
-
-    // // $.ajax({
-    // //   url: baseUrl + superFinal,
-    // //   method: "GET",
-    // // })
-    // .then(function (results) {
-    // console.log("results: ", results);
     $.post("/api/hero/" + superFinal).then(function (response) {
       console.log("response: ", response);
       let addedHero = $("<div>");
