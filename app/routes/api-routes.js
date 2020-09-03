@@ -3,6 +3,7 @@ const request = require("request");
 const connection = require("../config/connectmySQL");
 const db = require("../models");
 const passport = require("../config/passport.js");
+
 // routes for our user_db===================================================================================
 router.post("/login", passport.authenticate("local"), (req, res) => {
   console.log("post /api/login");
@@ -27,6 +28,7 @@ router.post("/signup", (req, res) => {
 });
 
 router.get("/user_data", (req, res) => {
+  console.log(req.user);
   if (!req.user) {
     // The user is not logged in, send back an empty object
     res.json({});
@@ -38,6 +40,12 @@ router.get("/user_data", (req, res) => {
       id: req.user.id,
     });
   }
+});
+
+// Route for logging user out
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 // routes for superhero api database=====================================================================
@@ -56,6 +64,10 @@ router.get("/hero/:name", (req, res) => {
 
     body = JSON.parse(body);
 
+    if (body.results === undefined) {
+      console.log("==================================================");
+      return;
+    }
     var results = body.results.filter((hero) => {
       return hero.name.toLowerCase() === req.params.name.toLowerCase();
     });
@@ -101,6 +113,10 @@ router.post("/hero/:name", (req, res) => {
 
     body = JSON.parse(body);
 
+    if (body.results === undefined) {
+      console.log("==================================================");
+      return;
+    }
     var results = body.results.filter((hero) => {
       return hero.name.toLowerCase() === req.params.name.toLowerCase();
     });

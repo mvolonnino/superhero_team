@@ -1,4 +1,11 @@
 $(document).ready(() => {
+  // display email on top of page
+  $.get("/api/user_data").then((data) => {
+    console.log("/user_data");
+    console.log("data", data);
+    $(".member-name").text(data.email);
+  });
+
   $("#searchBtn").on("click", (event) => {
     event.preventDefault();
     var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
