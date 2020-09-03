@@ -12,7 +12,7 @@ $(document).ready(() => {
     } else if (supeName.length === 3) {
       superFinal += supeName[0] + "%20" + supeName[1] + "%20" + supeName[2];
     }
-    // console.log("superFinal: ", superFinal);
+    console.log("superFinal: ", superFinal);
     getSuperHero(superFinal);
 
     function getSuperHero(superFinal) {
@@ -58,8 +58,27 @@ $(document).ready(() => {
   // post route to post the choosen hero our heros table
   $("#addHero").on("click", (event) => {
     event.preventDefault();
-    $.post("/api/hero/:name").then(function () {
-      console.log("data: ");
+    var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
+    console.log("supeName:", supeName);
+    var superFinal = "";
+
+    if (supeName.length === 1) {
+      superFinal = supeName;
+    } else if (supeName.length === 2) {
+      superFinal += supeName[0] + "%20" + supeName[1];
+    } else if (supeName.length === 3) {
+      superFinal += supeName[0] + "%20" + supeName[1] + "%20" + supeName[2];
+    }
+    var baseUrl = "http://localhost:8080/api/hero/";
+
+    $.ajax({
+      url: baseUrl + superFinal,
+      method: "GET",
+    }).then(function (results) {
+      console.log("results: ", results);
+      $.post("/api/hero/" + superFinal, results).then(function () {
+        console.log("data: ");
+      });
     });
   });
 });

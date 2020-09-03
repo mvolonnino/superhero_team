@@ -79,39 +79,80 @@ router.get("/hero/:name", (req, res) => {
     for (var i = 0; i < values.length; i++) {
       total_power += parseInt(values[i]);
     }
-    router.post("/hero/:name", (req, res) => {
-      console.log("post /api/hero/:name");
-      console.log("name: ", heroName);
-      db.Hero.findOne({
-        where: {
+  });
+});
+
+router.post("/hero/:name", (req, res) => {
+  console.log("post /api/hero/:name");
+  console.log("=========================================");
+  // console.log("hero_id ", hero_id);
+
+  console.log("name: ");
+  var baseUrl = "http://superheroapi.com/api/";
+  var volonnninoToken = "10223684788131570";
+  var searchParam = "/search/" + req.params.name;
+  var superheroQuery = baseUrl + volonnninoToken + searchParam;
+  console.log("supeheroQuery: ", superheroQuery);
+
+  request({ url: superheroQuery }, (error, response, body) => {
+    if (error || response.statusCode !== 200) {
+      return res.statusCode(500).json({ type: "error", message: err.message });
+    }
+
+    body = JSON.parse(body);
+
+    var results = body.results.filter((hero) => {
+      return hero.name.toLowerCase() === req.params.name.toLowerCase();
+    });
+    // grabbing information on the hero searched
+    res.json(results);
+
+    console.log("hero: ", results);
+    var heroName = results[0].name;
+    console.log("heroName: ", heroName);
+    var alignment = results[0].biography.alignment;
+    var hero_id = results[0].id;
+    var imageURL = results[0].image.url;
+    // console.log("imageURL: ", imageURL);
+    var powerstats = results[0].powerstats;
+    // console.log("powerstats: ", powerstats);
+    var stats = powerstats;
+    var keys = Object.keys(stats);
+    var values = Object.values(stats);
+    var entries = Object.entries(stats);
+    var total_power = 0;
+    for (var i = 0; i < values.length; i++) {
+      total_power += parseInt(values[i]);
+    }
+    db.Hero.findOne({
+      where: {
+        name: heroName,
+      },
+    }).then(function (dbHero) {
+      if (dbHero === null) {
+        console.log("Will Add Hero....");
+        db.Hero.create({
           name: heroName,
-        },
-      }).then(function (dbHero) {
-        if (dbHero === null) {
-          console.log("Will Add Hero....");
-          db.Hero.create({
-            name: heroName,
-            hero_id: parseInt(hero_id),
-            intel: parseInt(results[0].powerstats.intelligence),
-            strength: parseInt(results[0].powerstats.strength),
-            speed: parseInt(results[0].powerstats.speed),
-            durability: parseInt(results[0].powerstats.durability),
-            power: parseInt(results[0].powerstats.power),
-            combat: parseInt(results[0].powerstats.combat),
-            total_power: total_power,
-            alignment: alignment,
-            img_url: imageURL,
-          }).then(() => {
-            var query = "SELECT * FROM Heros";
-            connection.query(query, function (err, res) {
-              if (err) throw err;
-              console.table(res);
-            });
+          hero_id: parseInt(hero_id),
+          intel: parseInt(results[0].powerstats.intelligence),
+          strength: parseInt(results[0].powerstats.strength),
+          speed: parseInt(results[0].powerstats.speed),
+          durability: parseInt(results[0].powerstats.durability),
+          power: parseInt(results[0].powerstats.power),
+          combat: parseInt(results[0].powerstats.combat),
+          total_power: total_power,
+          alignment: alignment,
+          img_url: imageURL,
+        }).then(() => {
+          var query = "SELECT * FROM Heros";
+          connection.query(query, function (err, res) {
+            if (err) throw err;
+            console.table(res);
           });
-        } else {
-          console.log("Hero is already in database");
-        }
-      });
+        });
+      } else {
+        console.log("Hero is already in database");
+      }
     });
   });
 });
