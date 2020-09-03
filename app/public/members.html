@@ -34,7 +34,7 @@
           </li>
           <p class="pipe">|</p>
           <li class="nav-item">
-            <a class="nav-link" href="/login"> Logout </a>
+            <a class="nav-link" href="/api/logout"> Logout </a>
           </li>
         </ul>
       </div>
@@ -68,21 +68,22 @@
         </div>
       </div>
       <div class="row">
-        <div id="superCard" class="col-md-6"">
-          <div class="card" style="width:18rem">
-          <img src="https://www.superherodb.com/pictures2/portraits/10/100/140.jpg" alt="Thor" class="card-img-top img-thumbnail">
-          <div class="card-body">
-            <h5 class="card-title">Thor</h5>
-            <p class="card-text">results.biography.alignment</p>
-            <p class="card-text">results.biography.publisher</p>
-            <p class="card-text">results.appearance.gender</p>
-            <p class="card-text">table => total_power</p>
-            <button id="addHero" class="submit btn btn-danger">Add to Universe</button>
+        <div id="heroResultsCol" class="col-md-6"">
+          <h3>Your Choosen Hero</h3>
+          <div id="heroResults"class="card" style="width:18rem">
+          <img src="" alt="" class="card-img-top" id="hero_img">
+          <div id="card_body" class="card-body">
+            <h5 id="hero_name"class="card-title"></h5>
+            <p id="hero_race" class="card-text"></p>
+            <p id="hero_alignment" class="card-text"></p>
+            <p id="hero_occupation"class="card-text"></p>
+            <p id="hero_publisher" class="card-text"></p>
+            <p id="hero_total_power"class="card-text"></p>
+            <button id="addHero" class="btn btn-danger d-none">Add To Universe</button>
           </div>
           </div>
-          
         </div>
-        <div id="universeTable" class="col-md-6">
+        <!-- <div id="universeTable" class="col-md-6">
           <div class="card mb-3" style="max-width: 540px;">
             <div class="row no-gutters">
               <div class="col-md-4">
@@ -100,7 +101,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

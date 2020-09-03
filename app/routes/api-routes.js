@@ -3,6 +3,7 @@ const request = require("request");
 const connection = require("../config/connectmySQL");
 const db = require("../models");
 const passport = require("../config/passport.js");
+
 // routes for our user_db===================================================================================
 router.post("/login", passport.authenticate("local"), (req, res) => {
   console.log("post /api/login");
@@ -27,6 +28,7 @@ router.post("/signup", (req, res) => {
 });
 
 router.get("/user_data", (req, res) => {
+  // console.log(req.user);
   if (!req.user) {
     // The user is not logged in, send back an empty object
     res.json({});
@@ -40,24 +42,15 @@ router.get("/user_data", (req, res) => {
   }
 });
 
-// router.get("/hero/:name", function(req, res) {
-//   // findAll returns all entries for a table when used with no options
-//   console.log("PUSH DATA TO HERO PAGE");
-//   db.Hero.findOne({
-//     where: 
-//       {name: req.params.name}
-//   }).then(function(answers) {
-//     // We have access to the todos as an argument inside of the callback function
-//     console.log("Our hero to send: ", answers);
-//     res.json(answers);
-//   });
-// });
+// Route for logging user out
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
 
 // routes for superhero api database=====================================================================
-
-
 router.get("/hero/:name", (req, res) => {
-  console.log("post /api/hero/:name");
+  console.log("get /api/hero/:name");
   var baseUrl = "http://superheroapi.com/api/";
   var volonnninoToken = "10223684788131570";
   var searchParam = "/search/" + req.params.name;
@@ -68,10 +61,13 @@ router.get("/hero/:name", (req, res) => {
     if (error || response.statusCode !== 200) {
       return res.statusCode(500).json({ type: "error", message: err.message });
     }
-  
+
     body = JSON.parse(body);
 
-
+    if (body.results === undefined) {
+      console.log("==================================================");
+      return;
+    }
     var results = body.results.filter((hero) => {
       return hero.name.toLowerCase() === req.params.name.toLowerCase();
     });
@@ -95,33 +91,85 @@ router.get("/hero/:name", (req, res) => {
     for (var i = 0; i < values.length; i++) {
       total_power += parseInt(values[i]);
     }
-    // console.log("total_power:", total_power);
-    // console.log("values: ", values);
-    // console.log("keys:", keys);
-    // console.log("values:", values);
-    // console.log("entries:", entries);
+  });
+});
 
-    // Need to put this `hero` into renderHero() for when add to universe is clicked
-    // db.Hero.create({
-    //   name: heroName,
-    //   hero_id: parseInt(hero_id),
-    //   intel: parseInt(results[0].powerstats.intelligence),
-    //   strength: parseInt(results[0].powerstats.strength),
-    //   speed: parseInt(results[0].powerstats.speed),
-    //   durability: parseInt(results[0].powerstats.durability),
-    //   power: parseInt(results[0].powerstats.power),
-    //   combat: parseInt(results[0].powerstats.combat),
-    //   total_power: total_power,
-    //   alignment: alignment,
-    //   img_url: imageURL,
-    // }).then(() => {
-    //   var query = "SELECT * FROM Heros";
-    //   connection.query(query, function (err, res) {
-    //     if (err) throw err;
-    //     console.log("you are a fuckin boss");
-    //     console.table(res);
-    //   });
-    // });
+router.post("/hero/:name", (req, res) => {
+  console.log("post /api/hero/:name");
+  console.log("=========================================");
+  // console.log("hero_id ", hero_id);
+
+  console.log("name: ");
+  var baseUrl = "http://superheroapi.com/api/";
+  var volonnninoToken = "10223684788131570";
+  var searchParam = "/search/" + req.params.name;
+  var superheroQuery = baseUrl + volonnninoToken + searchParam;
+  console.log("supeheroQuery: ", superheroQuery);
+
+  request({ url: superheroQuery }, (error, response, body) => {
+    if (error || response.statusCode !== 200) {
+      return res.statusCode(500).json({ type: "error", message: err.message });
+    }
+
+    body = JSON.parse(body);
+
+    if (body.results === undefined) {
+      console.log("==================================================");
+      return;
+    }
+    var results = body.results.filter((hero) => {
+      return hero.name.toLowerCase() === req.params.name.toLowerCase();
+    });
+    // grabbing information on the hero searched
+    res.json(results);
+
+    console.log("hero: ", results);
+    var heroName = results[0].name;
+    console.log("heroName: ", heroName);
+    var alignment = results[0].biography.alignment;
+    var hero_id = results[0].id;
+    var imageURL = results[0].image.url;
+    // console.log("imageURL: ", imageURL);
+    var powerstats = results[0].powerstats;
+    // console.log("powerstats: ", powerstats);
+    var stats = powerstats;
+    var keys = Object.keys(stats);
+    var values = Object.values(stats);
+    var entries = Object.entries(stats);
+    var total_power = 0;
+    for (var i = 0; i < values.length; i++) {
+      total_power += parseInt(values[i]);
+    }
+    db.Hero.findOne({
+      where: {
+        name: heroName,
+      },
+    }).then(function (dbHero) {
+      if (dbHero === null) {
+        console.log("Will Add Hero....");
+        db.Hero.create({
+          name: heroName,
+          hero_id: parseInt(hero_id),
+          intel: parseInt(results[0].powerstats.intelligence),
+          strength: parseInt(results[0].powerstats.strength),
+          speed: parseInt(results[0].powerstats.speed),
+          durability: parseInt(results[0].powerstats.durability),
+          power: parseInt(results[0].powerstats.power),
+          combat: parseInt(results[0].powerstats.combat),
+          total_power: total_power,
+          alignment: alignment,
+          img_url: imageURL,
+        }).then(() => {
+          var query = "SELECT * FROM Heros";
+          connection.query(query, function (err, res) {
+            if (err) throw err;
+            console.table(res);
+          });
+        });
+      } else {
+        console.log("Hero is already in database");
+      }
+    });
   });
 });
 
