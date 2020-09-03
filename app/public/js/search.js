@@ -30,9 +30,12 @@ $(document).ready(() => {
       }).then(function (results) {
         console.log("HERO RESULTS: ", results);
         if (results.type === "error") {
-          console.log("Hero does not exist in this univers's source");
+          console.log("Hero does not exist in this universe's source");
+          $("#heroResultsCol").hide();
+          alert("Hero not found in the universe's source! Check Spelling and search again")
         } else {
           renderHero();
+          $("#heroResultsCol").show();
         }
         function renderHero() {
           // grabbing informatoin based on search results
@@ -83,6 +86,5 @@ $(document).ready(() => {
       console.log("response: ", response);
       let addedHero = $("<div>");
     });
-    // });
   });
 });
