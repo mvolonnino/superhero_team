@@ -3,6 +3,7 @@ const request = require("request");
 const connection = require("../config/connectmySQL");
 const db = require("../models");
 const passport = require("../config/passport.js");
+const { sequelize } = require("../models");
 
 // routes for our heros table==================================================================================
 router.get("/hero_data", (req, res) => {
@@ -13,9 +14,12 @@ router.get("/hero_data", (req, res) => {
 });
 
 router.get("/villain_data", (req, res) => {
-  //receive call from front-end, enter database and grab all hero data
-  db.Villain.findAll({}).then((allVillains) => {
-    res.json(allVillains);
+  //receive call from front-end, enter database and grab one random villain
+  db.Villain.findAll({
+    order: sequelize.random(),
+    limit: 1,
+  }).then(function (results) {
+    res.json(results);
   });
 });
 
