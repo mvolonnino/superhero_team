@@ -40,33 +40,98 @@
       </div>
     </nav>
     <div class="container">
-      <center>
+      <div id="universeMessage" class="row text-center">
+        <div class="card headerCard">
+          <div class="card-body">
+            <h2 class="card-title">
+              Choose your hero to fight against the evils of the multiverse!
+            </h2>
+            <p class="card-title">
+              <span class="villain"></span> is approaching fast...
+            </p>
+            <p class="card-text">
+              Read your heroes stats wisely. When you click "fight" that will
+              send your hero into battle against a villain that threatens the
+              universe.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div id="battleground">
         <div class="row text-center">
           <div class="card headerCard">
             <div class="card-body">
               <h2 class="card-title">
-                Choose your hero to fight against the evils of the multiverse!
+                You have arrived at the battlegrounds. Save the universe!
               </h2>
-              <p class="card-title">
-                <span class="villain"></span> is approaching fast...
-              </p>
               <p class="card-text">
-                Read your heroes stats wisely. When you click "fight" that will
-                send your hero into battle against a villain that threatens the
-                universe.
+                Stats are as follows: Total Power is a combination of all heroes
+                stats. Attack is a combination of intelligence + power + combat.
+                Health is a combination of durability + strength + speed. Attack
+                power is randomized based on the full attack power available to
+                a hero.
               </p>
             </div>
           </div>
         </div>
-      </center>
+      </div>
     </div>
-
+    <div class="container-fluid customCSS">
+      <div id="battlegroundRow" class="row">
+        <div id="heroResultsCol" class="col-lg">
+          <div id="heroResults" class="card" style="width: 18rem">
+            <img
+              src=""
+              alt=""
+              class="card-img-top img-thumbnail"
+              id="hero_img"
+            />
+            <div id="card_body" class="card-body">
+              <h5 id="hero_name" class="card-title"></h5>
+              <hr />
+              <p id="hero_alignment" class="card-text mb-1"></p>
+              <p id="hero_total_power" class="card-text mb-1"></p>
+              <p id="hero_attack" class="card-text mb-1"></p>
+              <p id="hero_health" class="card-text mb-1"></p>
+              <button class="btn btn-danger">Attack!</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg">
+          <div class="card" style="width: 18rem">
+            <div class="card-body">The Battlegrounds</div>
+          </div>
+        </div>
+        <div id="villainResultsCol" class="col-lg">
+          <div id="villainResults" class="card" style="width: 18rem">
+            <img
+              src=""
+              alt=""
+              class="card-img-top img-thumbnail"
+              id="villainImg"
+            />
+            <div id="card_body" class="card-body">
+              <h5 id="villainName" class="card-title"></h5>
+              <hr />
+              <p id="villain_alignment" class="card-text mb-2"></p>
+              <p id="villain_total_power" class="card-text mb-2"></p>
+              <p id="villain_attack" class="card-text mb-2"></p>
+              <p id="villain_health" class="card-text mb-2"></p>
+              <!-- <button class="btn btn-danger">Attack!</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid mb-4">
       <div
         class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5"
         id="rowWrapper"
       >
         <!-- Dynamically generated columns and card will go here -->
+      </div>
+      <div id="villainCard" class="row d-none">
+        <!-- villain card here -->
       </div>
     </div>
 

@@ -46,7 +46,7 @@
 
 /* ----Card Styles---- */
 .headerCard {
-  width: 60rem;
+  width: 100%;
 }
 /* .card {
   max-width: 12rem;
@@ -61,6 +61,11 @@
 
 .fightBtn {
   margin-top: 6px;
+}
+
+/* container  */
+.customCSS {
+  text-align: -webkit-center;
 }
 
 /* ----Media Queries---- */
