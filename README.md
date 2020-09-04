@@ -10,11 +10,7 @@ Any fan of superhero movies and comics has at one point wondered who would win i
 1. When you've made your selection, click "Add to Universe" to add your hero to your stable of heroes. 
 1. When you're ready to battle, click on "Your Universe" in the navigation bar.
 1. Choose which hero to go into battle with by clicking "Fight!" on their card. This will send them into battle against a random super villain. 
-1. explain fighting game instructions 
-
-## CONTENT PREVIEW
-screenshots  
-gif?
+1. You are then brought to the BattleGrounds page. To begin the battle, click "Attack!". Good luck!
 
 ## TECHNOLOGIES
 * HTML5 
