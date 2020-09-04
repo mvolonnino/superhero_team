@@ -21,6 +21,9 @@ $(document).ready(() => {
       var heroDurability = $("<p id='heroDurability' class='card-text'>");
       var heroPower = $("<p id='heroPower' class='card-text'>");
       var heroCombat = $("<p id='heroCombat' class='card-text'>");
+      var heroHealth=$("<p id='heroHealth' class = 'card-text'");
+      var heroAttack=$("<p id='heroAttack' class = 'card-text'");
+      var heroTotalPower=$("<p id='heroTotalPower' class = 'card-text'"); 
       var fightBtn = $("<button class='btn btn-secondary fightBtn'>").text(
         "Fight!"
       );
