@@ -27,14 +27,20 @@ $(document).ready(() => {
     console.log("dataId: ", dataId);
     var name = $(this).siblings("#hero_name").text();
     var intel = $(this).siblings("#heroInt").text().split(" ")[1];
-    var strength = $(this).siblings("#heroStrngth").text().split(" ")[1];
+    var strength = $(this).siblings("#heroStrength").text().split(" ")[1];
     var speed = $(this).siblings("#heroSpeed").text().split(" ")[1];
     var durability = $(this).siblings("#heroDurability").text().split(" ")[1];
     var power = $(this).siblings("#heroPower").text().split(" ")[1];
     var combat = $(this).siblings("#heroCombat").text().split(" ")[1];
+    var alignment = $(this).siblings("#heroAlignment").text();
+    console.log("alignment: ", alignment);
+    var total_power = $(this).siblings("#heroTotalPower").text().split(" ")[2];
+    console.log("total power: ", total_power);
 
     const hero = new Character(
       name,
+      alignment,
+      parseInt(total_power),
       parseInt(intel),
       parseInt(strength),
       parseInt(speed),
@@ -59,24 +65,24 @@ $(document).ready(() => {
 
   function Character(
     name,
+    alignment,
+    total_power,
     intel,
     strength,
     speed,
     power,
     durability,
-    combat,
-    total_power,
-    alignment
+    combat
   ) {
     this.name = name;
+    this.alignment = alignment;
+    this.total_power = total_power;
     this.intel = intel;
     this.strength = strength;
     this.speed = speed;
     this.power = power;
     this.durability = durability;
     this.combat = combat;
-    this.total_power = total_power;
-    this.alignment = alignment;
     this.attack = intel + power + combat;
     this.health = durability + strength + speed;
   }

@@ -15,8 +15,8 @@ $(document).ready(() => {
       );
       var heroBody = $("<div id='card_body' class='card-body'>");
       var heroName = $("<h5 id='hero_name'class='card-title'>");
-      var heroTotalPower=$("<p id='heroTotalPower' class = 'card-text'>"); 
-      var heroAlignment=$("<p id='heroAlignment' class = 'card-text'>")
+      var heroTotalPower = $("<p id='heroTotalPower' class = 'card-text'>");
+      var heroAlignment = $("<p id='heroAlignment' class = 'card-text'>");
       var heroInt = $("<p id='heroInt'class='card-text' >");
       var heroStrength = $("<p id='heroStrength' class='card-text'>");
       var heroSpeed = $("<p id='heroSpeed' class='card-text'>");
@@ -24,8 +24,7 @@ $(document).ready(() => {
       var heroPower = $("<p id='heroPower' class='card-text'>");
       var heroCombat = $("<p id='heroCombat' class='card-text'>");
       var lineBreak = $("<hr>");
-      
-      
+
       var fightBtn = $("<button class='btn btn-secondary fightBtn'>").text(
         "Fight!"
       );
@@ -43,9 +42,10 @@ $(document).ready(() => {
       heroAlignment.text("Alignment: " + response[i].alignment);
       heroBody.append(heroAlignment);
 
-      var health = (response[i].strength) + (response[i].speed) + (response[i].durability);
-      var attack = (response[i].intel) + (response[i].power) + (response[i].combat);
-      heroTotalPower.text("Total Power: " + (health+attack));
+      var health =
+        response[i].strength + response[i].speed + response[i].durability;
+      var attack = response[i].intel + response[i].power + response[i].combat;
+      heroTotalPower.text("Total Power: " + (health + attack));
       heroBody.append(heroTotalPower);
 
       heroInt.text("Intelligence: " + response[i].intel);
@@ -66,10 +66,6 @@ $(document).ready(() => {
       heroCombat.text("Combat: " + response[i].combat);
       heroBody.append(heroCombat);
 
- 
-  
-
-
       heroBody.append(fightBtn);
 
       heroCard.append(heroBody);
@@ -77,9 +73,9 @@ $(document).ready(() => {
       newRow.append(newCol);
     }
   });
-//   $(document).on("click", ".fightBtn", function () {
-//     event.preventDefault();
-//     var dataId = $(this).attr("data-id");
-//     console.log("dataId: ", dataId);
-//   });
+  //   $(document).on("click", ".fightBtn", function () {
+  //     event.preventDefault();
+  //     var dataId = $(this).attr("data-id");
+  //     console.log("dataId: ", dataId);
+  //   });
 });
