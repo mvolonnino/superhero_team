@@ -30,11 +30,15 @@ $(document).ready(() => {
       parseInt(combat)
     );
 
-    confirm(`Are you sure you want to use ${name} to fight?`);
-    if (confirm) {
+    var confirmFight = confirm(
+      `Are you sure you want to use ${name} to fight?`
+    );
+    if (confirmFight) {
+      console.log("confirm: ", confirmFight);
       console.log(`${name} will be used to fight`);
       startFight(hero);
     } else {
+      console.log("confirm: ", confirmFight);
       console.log(`${name} will not be used to fight`);
     }
   });
