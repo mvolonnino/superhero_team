@@ -82,13 +82,13 @@ $(document).ready(() => {
     var villainHTML = response[0].name;
     $(".villain").text(villainHTML);
 
-    var newRow = $("#rowWrapper");
+    var villainCard = $("#villainCard");
 
     for (var i = 0; i < response.length; i++) {
       var newCol = $("<div class='col mt-4'>");
       var heroCard = $("<div class='card'>");
       var heroImg = $(
-        "<img src='' alt='' class='card-img-top img-thumbnail' id='hero_img'>"
+        "<img src='' alt='' class='card-img-top img-thumbnail' id='villain_img'>"
       );
       var heroBody = $("<div id='card_body' class='card-body'>");
       var heroName = $("<h5 id='villain_name'class='card-title'>");
@@ -101,11 +101,6 @@ $(document).ready(() => {
       var heroPower = $("<p id='villainPower' class='card-text'>");
       var heroCombat = $("<p id='villainCombat' class='card-text'>");
       var lineBreak = $("<hr>");
-
-      //   var fightBtn = $("<button class='btn btn-danger fightBtn'>").text(
-      //     "Fight!"
-      //   );
-      //   fightBtn.attr("data-id", i);
 
       heroCard.append(heroImg);
       heroImg
@@ -147,7 +142,7 @@ $(document).ready(() => {
 
       heroCard.append(heroBody);
       newCol.append(heroCard);
-      newRow.append(newCol);
+      villainCard.append(newCol);
     }
   });
 });

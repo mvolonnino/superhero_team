@@ -3,25 +3,22 @@ const path = require("path");
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function (app) {
-  app.get("/members", isAuthenticated, function (req, res) {
-    console.log("get /members");
-    res.sendFile(path.join(__dirname, "../public/members.html"));
-  });
-
-  // app.get("/signup", function (req, res) {
-  //   console.log("get /signup");
-  //   if (req.user) {
-  //     res.redirect("/members");
-  //   }
-  //   res.sendFile(path.join(__dirname, "../public/signup.html"));
-  // });
-
   app.get("/", function (req, res) {
     console.log("get / -> landing page");
     if (req.user) {
       res.redirect("/members");
     }
     res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
+
+  app.get("/members", isAuthenticated, function (req, res) {
+    console.log("get /members");
+    res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
+
+  app.get("/battlegrounds", function (req, res) {
+    console.log("get /battlegrounds");
+    res.sendFile(path.join(__dirname, "../public/battlegrounds.html"));
   });
 
   app.get("/login", function (req, res) {
