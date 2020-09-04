@@ -92,6 +92,79 @@ $(document).ready(() => {
     // $("#hero_durability").text(hero.durability);
     // $("#hero_power").text(hero.power);
     // $("#hero_combat").text(hero.combat);
+
+    // game logic
+    // display hero health
+    $(".hideMe").hide();
+    // attack button click will lower villain health
+    $("#attack-button").on("click", () => {
+      attack(hero, villain);
+    });
+    $("#hero-name").text(hero.name);
+    $("#hero-health").text(hero.health);
+    // display villain health
+    $("#villain-name").text(villain.name);
+    $("#villain-health").text(villain.health);
+    if (villain.health < villain.health / 4) {
+      $("#villain-health").attr("style", "color:red");
+    }
+  }
+  function attack(hero, villain) {
+    var hero_attack = Math.floor((Math.random() * hero.attack) / 2 + 5);
+    $("#attack-button").hide();
+    villain.health -= hero_attack;
+    $("#villain-health").text(villain.health);
+    if (villain.health <= 0) {
+      $("#villain-health").text("0");
+      $("#gameMessageHero").text(`${hero.name} IS VICTORIOUS! UNIVERSE SAVED`);
+      $("#attack-button").hide();
+      $(".hideMe").show();
+
+      return;
+    }
+    if (hero_attack === 0) {
+      $("#gameMessageHero").text(`${hero.name} missed! No damage dealt`);
+    } else if (hero_attack >= hero.attack / 2) {
+      $("#gameMessageHero").text(
+        `${hero.name} hit for ${hero_attack}, a critical hit`
+      );
+    } else {
+      $("#gameMessageHero").text(`${hero.name} hit for ${hero_attack} damage`);
+    }
+    console.log(hero_attack);
+
+    setTimeout(() => {
+      var villain_attack = Math.floor((Math.random() * villain.attack) / 2 + 5);
+      hero.health -= villain_attack;
+      $("#hero-health").text(hero.health);
+
+      if (hero.health <= 0) {
+        $("#hero-health").text("0");
+        $("#gameMessageHero").text(
+          `${villain.name} IS VICTORIOUS! YOU HAVE FAILED TO SAVE THE UNIVERSE`
+        );
+        $("#attack-button").hide();
+        $(".hideMe").show();
+
+        return;
+      }
+
+      if (villain_attack === 0) {
+        $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
+      } else if (villain_attack >= villain.attack / 2) {
+        $("#gameMessageHero").text(
+          `${villain.name} hit for ${villain_attack}: a critical hit`
+        );
+      } else {
+        $("#gameMessageHero").text(
+          `${villain.name} hit for ${villain_attack} damage`
+        );
+      }
+
+      console.log("villain attack: ", villain_attack);
+
+      $("#attack-button").show();
+    }, 2000);
   }
 
   // Character Models
@@ -118,6 +191,6 @@ $(document).ready(() => {
     this.durability = durability;
     this.combat = combat;
     this.attack = intel + power + combat;
-    this.health = durability + strength + speed;
+    this.health = Math.floor(durability * 2.5 + speed + strength);
   }
 });
