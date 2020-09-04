@@ -2,24 +2,29 @@ $(document).ready(() => {
   var heroArr = [];
   var villainArr = [];
 
-  $.get("/api/hero_data", (heros) => {
-    // console.log("heros", heros);
-  }).then(function (results) {
-    // console.log("thor: ", results[0].name);
-    for (var i = 0; i < results.length; i++) {
-      heroArr.push(results[i]);
-    }
-    console.log("heroArr: ", heroArr);
-  });
-
-  $.get("/api/villain_data", (villains) => {
-    console.log("villains: ", villains);
-  }).then(function (results) {
-    // console.log("lex luthor: ", results[0].name);
-    for (var i = 0; i < results.length; i++) {
-      villainArr.push(results[i]);
-    }
-  });
+  function makeVillainCharacter() {
+    var name = $("#villain_name").text();
+    var alignment = $("#villainAlignment").text().split(" ")[1];
+    var total_power = $("#villainTotalPower").text().split(" ")[2];
+    var intel = $("#villainIntel").text().split(" ")[1];
+    var strength = $("#villainStrength").text().split(" ")[1];
+    var speed = $("#villainSpeed").text().split(" ")[1];
+    var durability = $("#villainDurability").text().split(" ")[1];
+    var power = $("#villainPower").text().split(" ")[1];
+    var combat = $("#villainCombat").text().split(" ")[1];
+    const villain = new Character(
+      name,
+      alignment,
+      parseInt(total_power),
+      parseInt(intel),
+      parseInt(strength),
+      parseInt(speed),
+      parseInt(power),
+      parseInt(durability),
+      parseInt(combat)
+    );
+    console.log("Villain Character: ", villain);
+  }
 
   $(document).on("click", ".fightBtn", function () {
     event.preventDefault();
@@ -32,7 +37,7 @@ $(document).ready(() => {
     var durability = $(this).siblings("#heroDurability").text().split(" ")[1];
     var power = $(this).siblings("#heroPower").text().split(" ")[1];
     var combat = $(this).siblings("#heroCombat").text().split(" ")[1];
-    var alignment = $(this).siblings("#heroAlignment").text();
+    var alignment = $(this).siblings("#heroAlignment").text().split(" ")[1];
     console.log("alignment: ", alignment);
     var total_power = $(this).siblings("#heroTotalPower").text().split(" ")[2];
     console.log("total power: ", total_power);
@@ -48,10 +53,11 @@ $(document).ready(() => {
       parseInt(durability),
       parseInt(combat)
     );
-    console.log("hero: ", hero);
+    console.log("Hero Character: ", hero);
     confirm(`Are you sure you want to use ${name} to fight?`);
     if (confirm) {
       console.log(`${name} will be used to fight`);
+      makeVillainCharacter();
       startFight(hero);
     } else {
       console.log(`${name} will not be used to fight`);
@@ -59,10 +65,11 @@ $(document).ready(() => {
   });
 
   function startFight(hero) {
-    console.log("this is my hero: ", hero);
+    // console.log("this is my hero: ", hero);
     // redirect to start page
   }
 
+  // Character Models
   function Character(
     name,
     alignment,
@@ -86,27 +93,4 @@ $(document).ready(() => {
     this.attack = intel + power + combat;
     this.health = durability + strength + speed;
   }
-
-  // function getHero(cardName) {
-  //   console.log("cardName: ", cardName);
-  //   $.get("/api/hero_data/" + cardName).then(function (results) {
-  //     console.log("results from get /api/hero_data/: ", results);
-
-  //     hero.printStats();
-  //     console.log("hero: ", hero);
-  //   });
-  // }
-
-  // console.log("heroArr: ", heroArr);
-  // console.log("thor: ");
-  // console.log("villainArr: ", villainArr);
-
-  // const Thor = new Hero("Thor", "good", 69, 100, 83, 100, 100, 100, 552);
-  // const Thanos = new Hero("Thanos", "bad", 100, 100, 33, 100, 100, 80, 513);
-
-  // const  = new Hero("Thor", "good", 69, 100, 83, 100, 100, 100, 552);
-
-  // console.log(Thor);
-  // console.log("=================");
-  // console.log(Thanos);
 });
