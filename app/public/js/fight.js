@@ -31,7 +31,8 @@ $(document).ready(() => {
 
   function getHero(cardName) {
     console.log("cardName: ", cardName);
-    $.get("/api/hero_data/" + cardName).then(function (results) {
+    $.get("/api/hero_data/" + cardName)
+      .then(function (results) {
       console.log("results from get /api/hero_data/: ", results);
       function Character(
         name,
@@ -39,8 +40,10 @@ $(document).ready(() => {
         intel,
         strength,
         speed,
-        durability,
+        // durability,
+        // power,
         power,
+        durability,
         combat,
         total_power
       ) {
