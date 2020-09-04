@@ -93,14 +93,37 @@
               <p id="hero_total_power" class="card-text mb-1"></p>
               <p id="hero_attack" class="card-text mb-1"></p>
               <p id="hero_health" class="card-text mb-1"></p>
-              <button class="btn btn-danger">Attack!</button>
+              <button id="attack-button" onclick="" class="btn btn-danger">
+                Attack!
+              </button>
             </div>
           </div>
         </div>
         <div class="col-lg">
           <div class="card" style="width: 18rem">
-            <div class="card-body">The Battlegrounds</div>
+            <h2 class="card-title mt-2">The Battlegrounds</h2>
+            <div id="game" class="card-body">
+              <h4 class="card-text">
+                <span id="hero-name"></span> Health:
+                <span id="hero-health"></span>
+              </h4>
+              <hr />
+              <p id="gameMessageHero">battle messages</p>
+              <!-- <p id="gameMessageVillain">villain</p> -->
+              <hr />
+              <h4 class="card-text">
+                <span id="villain-name"></span> Health:
+                <span id="villain-health"></span>
+              </h4>
+            </div>
           </div>
+          <hr my-4 />
+          <p class="hideMe">
+            The next threat is approaching, rejoin your team and prepare...
+          </p>
+          <button onclick="location.reload()" class="btn btn-danger hideMe">
+            Your Universe
+          </button>
         </div>
         <div id="villainResultsCol" class="col-lg">
           <div id="villainResults" class="card" style="width: 18rem">
