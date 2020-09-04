@@ -23,7 +23,7 @@ $(document).ready(() => {
     getSuperHero(superFinal);
 
     function getSuperHero(superFinal) {
-      var baseUrl = "http://localhost:8080/api/hero/";
+      var baseUrl = "/api/hero/";
 
       $.ajax({
         url: baseUrl + superFinal,

@@ -1,6 +1,6 @@
 $(document).ready(() => {
   //make a call to our api-routes to search our heros database and return the data for ALL heroes
-  var baseUrl = "http://localhost:8080/api/hero_data";
+  var baseUrl = "/api/hero_data";
   $.get(baseUrl).then((response) => {
     // console.log("All our heroes: ", response);
     // console.log("Hero array length: ", response.length);
@@ -74,7 +74,7 @@ $(document).ready(() => {
     }
   });
 
-  var baseUrl = "http://localhost:8080/api/villain_data";
+  var baseUrl = "/api/villain_data";
   $.get(baseUrl).then((response) => {
     // console.log("All our heroes: ", response);
     // console.log("Hero array length: ", response.length);
