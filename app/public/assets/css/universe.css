@@ -1,92 +1,93 @@
 /* ----Navbar---- */
 .navbar {
-    min-height: 80px;
-  }
-  
-  .customNavbar {
-    padding: 0;
-  }
-  
-  .navbar-brand {
-    padding: 0 15px;
-    margin-bottom: 0px;
-    height: 80px;
-    line-height: 80px;
-  }
-  
-  .navbar-toggle {
-    margin-top: 23px;
-    padding: 9px 10px !important;
-  }
-  
-  .pipe {
-    color: gray;
-    display: flex;
-    align-items: center;
-    opacity: 30%;
-    margin: 0 15px;
-  }
-  
-  .navRightLink {
-    flex-direction: row;
-    margin-right: 15px;
-  }
-  
-  .mainHeader {
-    background: white;
-  }
-  
-  .customButton {
-    color: white;
-  }
-  
-  .navLeft {
-    margin-left: 15px;
-  }
-  
-  /* ----Card Styles---- */
-.card {
-    max-width: 12rem;
-    
+  min-height: 80px;
 }
-  .card-text {
-    margin-bottom: 0;
-  }
-  
-  .card-title {
-    margin-bottom: 2px;
-  }
-  
-  .customBtn {
-    margin-top: 4px;
-  }
-  
-  /* ----Media Queries---- */
-  @media screen and (max-width: 641px) {
-    /* Navbar */
-    .navRight {
-      width: 100%;
-    }
-  
-    .navRightLink {
-      width: 100%;
-      justify-content: center;
-      margin: 0;
-    }
-  
-    .navLeft {
-      width: 100%;
-      margin: 0;
-    }
-  
-    .fullNav {
-      width: 100%;
-      text-align: center;
-      font-size: xx-large;
-    }
-  
-    .main-content {
-      padding-bottom: 85px;
-    }
+
+.customNavbar {
+  padding: 0;
+}
+
+.navbar-brand {
+  padding: 0 15px;
+  margin-bottom: 0px;
+  height: 80px;
+  line-height: 80px;
+}
+
+.navbar-toggle {
+  margin-top: 23px;
+  padding: 9px 10px !important;
+}
+
+.pipe {
+  color: gray;
+  display: flex;
+  align-items: center;
+  opacity: 30%;
+  margin: 0 15px;
+}
+
+.navRightLink {
+  flex-direction: row;
+  margin-right: 15px;
+}
+
+.mainHeader {
+  background: white;
+}
+
+.customButton {
+  color: white;
+}
+
+.navLeft {
+  margin-left: 15px;
+}
+
+/* ----Card Styles---- */
+.headerCard {
+  width: 60rem;
+}
+/* .card {
+  max-width: 12rem;
+} */
+.card-text {
+  margin-bottom: 0;
+}
+
+.card-title {
+  margin-bottom: 2px;
+}
+
+.fightBtn {
+  margin-top: 6px;
+}
+
+/* ----Media Queries---- */
+@media screen and (max-width: 641px) {
+  /* Navbar */
+  .navRight {
+    width: 100%;
   }
 
+  .navRightLink {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .navLeft {
+    width: 100%;
+    margin: 0;
+  }
+
+  .fullNav {
+    width: 100%;
+    text-align: center;
+    font-size: xx-large;
+  }
+
+  .main-content {
+    padding-bottom: 85px;
+  }
+}

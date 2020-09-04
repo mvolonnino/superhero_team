@@ -10,69 +10,6 @@ $(document).ready(() => {
       heroArr.push(results[i]);
     }
     console.log("heroArr: ", heroArr);
-    function Hero(
-      name,
-      alignment,
-      intel,
-      strength,
-      speed,
-      durability,
-      power,
-      combat,
-      total_power
-    ) {
-      this.name = name;
-      this.alignment = alignment;
-      this.intel = intel;
-      this.strength = strength;
-      this.speed = speed;
-      this.power = power;
-      this.durability = durability;
-      this.combat = combat;
-      this.total_power = total_power;
-      this.attack = intel + power + combat;
-      this.health = durability + strength + speed;
-    }
-
-    Hero.prototype.printStats = function () {
-      console.log(
-        "Name: " +
-          this.name +
-          "\nAlignment: " +
-          this.alignment +
-          "\nIntelligence: " +
-          this.intel +
-          "\nStrength: " +
-          this.strength +
-          "\nSpeed: " +
-          this.speed +
-          "\nPower: " +
-          this.power +
-          "\nDurability: " +
-          this.durability +
-          "\nCombat: " +
-          this.combat +
-          "\nTotal Power: " +
-          this.total_power +
-          "\nAttack: " +
-          this.attack +
-          "\nHealth: " +
-          this.health
-      );
-    };
-    const Thor = new Hero(
-      results[0].name,
-      results[0].alignment,
-      results[0].intel,
-      results[0].strength,
-      results[0].speed,
-      results[0].power,
-      results[0].durability,
-      results[0].combat,
-      results[0].total_power
-    );
-    Thor.printStats();
-    console.log("Constructor Thor: ", Thor);
   });
 
   $.get("/api/villain_data", (villains) => {
@@ -83,6 +20,86 @@ $(document).ready(() => {
       villainArr.push(results[i]);
     }
   });
+  $(document).on("click", ".fightBtn", function () {
+    event.preventDefault();
+    var dataId = $(this).attr("data-id");
+    console.log("dataId: ", dataId);
+    cardName = $(this).siblings("#hero_name").text();
+    // console.log("cardName: ", cardName);
+    getHero(cardName);
+  });
+
+  function getHero(cardName) {
+    console.log("cardName: ", cardName);
+    $.get("/api/hero_data/" + cardName).then(function (results) {
+      console.log("results from get /api/hero_data/: ", results);
+      function Character(
+        name,
+        alignment,
+        intel,
+        strength,
+        speed,
+        durability,
+        power,
+        combat,
+        total_power
+      ) {
+        this.name = name;
+        this.alignment = alignment;
+        this.intel = intel;
+        this.strength = strength;
+        this.speed = speed;
+        this.power = power;
+        this.durability = durability;
+        this.combat = combat;
+        this.total_power = total_power;
+        this.attack = intel + power + combat;
+        this.health = durability + strength + speed;
+      }
+
+      Character.prototype.printStats = function () {
+        console.log(
+          "Name: " +
+            this.name +
+            "\nAlignment: " +
+            this.alignment +
+            "\nIntelligence: " +
+            this.intel +
+            "\nStrength: " +
+            this.strength +
+            "\nSpeed: " +
+            this.speed +
+            "\nPower: " +
+            this.power +
+            "\nDurability: " +
+            this.durability +
+            "\nCombat: " +
+            this.combat +
+            "\nTotal Power: " +
+            this.total_power +
+            "\nAttack: " +
+            this.attack +
+            "\nHealth: " +
+            this.health
+        );
+      };
+      const hero = new Character(
+        results.name,
+        results.alignment,
+        results.intel,
+        results.strength,
+        results.speed,
+        results.power,
+        results.durability,
+        results.combat,
+        results.total_power
+      );
+      hero.printStats();
+      console.log("hero: ", hero);
+      return hero;
+    });
+  }
+
   // console.log("heroArr: ", heroArr);
   // console.log("thor: ");
   // console.log("villainArr: ", villainArr);

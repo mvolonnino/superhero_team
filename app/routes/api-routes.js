@@ -67,13 +67,22 @@ router.get("/logout", (req, res) => {
 // routes for superhero api database=====================================================================
 router.get("/hero_data", (req, res) => {
   //receive call from front-end, enter database and grab all hero data
-  db.Hero.findAll({})
-  .then(allHeroes => {
+  db.Hero.findAll({}).then((allHeroes) => {
     res.json(allHeroes);
-  })
-})
+  });
+});
 
-
+router.get("/hero_data/:name", (req, res) => {
+  console.log("req.params.name: ", req.params.name);
+  db.Hero.findOne({
+    where: {
+      name: req.params.name,
+    },
+  }).then(function (results) {
+    console.log("results: ", results);
+    res.json(results);
+  });
+});
 
 router.get("/hero/:name", (req, res) => {
   console.log("get /api/hero/" + req.params.name);

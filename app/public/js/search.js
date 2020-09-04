@@ -34,7 +34,7 @@ $(document).ready(() => {
           console.log("Hero does not exist in this universe's source");
           $("#heroResultsCol").hide();
           alert(
-            "Hero not found in the universe's source! Check spelling or search again."
+            "This hero may not exist in the multiverse.... Check spelling or search again!"
           );
         } else {
           renderHero();
