@@ -13,13 +13,15 @@ $(document).ready(() => {
       $.ajax({
         url: "/api/hero_data/" + delHero,
         method: "DELETE",
-      }).then(function (response) {
+      }).then(function () {
         console.log("delete successful");
         alert(`${delHero} was succesfully deleted from the universe...`);
         window.location.reload();
       });
     } else {
-      alert(`${delHero} will not be deleted and continue protecting the universe!`);
+      alert(
+        `${delHero} will not be deleted and continue protecting the universe!`
+      );
     }
   });
 
