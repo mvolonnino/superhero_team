@@ -13,6 +13,16 @@ router.get("/hero_data", (req, res) => {
   });
 });
 
+router.delete("/hero_data/:name", (req, res) => {
+  db.Hero.destroy({
+    where: {
+      name: req.params.name,
+    },
+  }).then(function (dbHero) {
+    res.json(dbHero);
+  });
+});
+
 router.get("/villain_data", (req, res) => {
   //receive call from front-end, enter database and grab one random villain
   db.Villain.findAll({

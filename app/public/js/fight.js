@@ -2,11 +2,13 @@ $(document).ready(() => {
   // $("#rowWrapper").show();
   $("#battlegroundRow").hide();
   $("#battleground").hide();
+  
   $(document).on("click", ".fightBtn", function () {
     event.preventDefault();
     // var dataId = $(this).attr("data-id");
     var img = $(this).parent().siblings("#hero_img").attr("src");
     var name = $(this).siblings("#hero_name").text();
+    console.log("name", name);
     var intel = $(this).siblings("#heroInt").text().split(" ")[1];
     var strength = $(this).siblings("#heroStrength").text().split(" ")[1];
     var speed = $(this).siblings("#heroSpeed").text().split(" ")[1];
