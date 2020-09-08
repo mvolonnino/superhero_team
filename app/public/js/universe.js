@@ -19,9 +19,9 @@ $(document).ready(() => {
         window.location.reload();
       });
     } else {
-      alert(
-        `${delHero} will not be deleted and continue protecting the universe!`
-      );
+      // alert(
+      //   `${delHero} will not be deleted and continue protecting the universe!`
+      // );
     }
   });
 
