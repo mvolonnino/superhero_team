@@ -1,14 +1,28 @@
 $(document).ready(() => {
+  recentSearchArr = [];
   // display email on top of page
   $.get("/api/user_data").then((data) => {
     console.log("/user_data");
     $(".member-name").text(data.email);
   });
 
+  // function recentSearches() {
+  //   for (var i = 0; i < recentSearchArr.length; i++) {
+  //     var pTag = $("<p>");
+  //     pTag.addClass("card-text");
+  //     pTag.text(recentSearchArr[i]);
+  //     console.log("recentSearchArr[i]: ", recentSearchArr[i]);
+  //     $("#recentSearches").appened(pTag);
+  //   }
+  // }
+  // recentSearches();
+
   $("#searchBtn").on("click", (event) => {
     event.preventDefault();
     $("#addedHero").remove();
     var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
+    recentSearchArr.push(supeName);
+    console.log("recentSearchArr: ", recentSearchArr);
     // console.log("supeName:", supeName);
     var superFinal = "";
 

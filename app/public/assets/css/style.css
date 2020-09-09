@@ -43,6 +43,11 @@
 .navLeft {
   margin-left: 15px;
 }
+/* Jumbotron Styles */
+
+.jumbotron {
+  margin-top: 20px;
+}
 
 /* ----Card Styles---- */
 .card-text {

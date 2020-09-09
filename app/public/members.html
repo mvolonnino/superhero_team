@@ -41,25 +41,31 @@
     </nav>
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h2>Welcome <span class="member-name"></span></h2>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Welcome <span class="member-name"></span>...</h2>
+              <p class="card-text">You are needed to help save the universe!</p>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
 
     <div class="container">
-      <div class="jumbotron">
-        <div class="display-4">Team, Assemble!</div>
-        <p class="lead">An evil force has been gathering and plans to attack. Search and assemble your superhero team below to save the universe!</p>
+      <div class="jumbotron bg-dark">
+        <div class="display-4 text-white">Team, Assemble!</div>
+        <p class="lead text-white">An evil force has been gathering and plans to attack. Search and assemble your favorite superheros from the comics, Marvel or DC, below to save the universe!</p>
         <hr class="my-4" />
         <div class="input-group mb-3">
           <div class="input_group-prepend">
             <span id="inputGroup-sizing-default" class="input-group-text"
-              >SuperHero Search</span
+              >Hero Name</span
             >
           </div>
           <input id="superheroSearch" type="text" class="form-control" /><button
-            type="button"
+            type="submit"
             id="searchBtn"
             class="btn btn-danger"
           >
@@ -68,8 +74,8 @@
         </div>
       </div>
       <div class="row">
-        <h3>Your Choosen Hero</h3>
         <div id="heroResultsCol" class="col-md-6"">
+          <h3>Your Choosen Hero</h3>
           <div id="heroResults"class="card" style="width:18rem">
           <img src="" alt="" class="card-img-top" id="hero_img">
           <div id="card_body" class="card-body">
@@ -83,25 +89,13 @@
           </div>
           </div>
         </div>
-        <!-- <div id="universeTable" class="col-md-6">
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-              <div class="col-md-4">
-                <img src="https://www.superherodb.com/pictures2/portraits/10/100/140.jpg" class="card-img img-thumbnail" alt="Thor">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">Thor</h5>
-                  <p class="card-text">results.biography.publisher</p>
-                  <p class="card-text">results.biography.alignment</p>
-                  <p class="card-text">results.appearance.gender</p>
-                  <p class="card-text">table => total_power</p>
-                  <button id="addHero" class="submit btn btn-danger btn-sm customBtn">Add to Universe</button>
-                </div>
-              </div>
-            </div>
+        <div class="col">
+          <h3>Recent Searches</h3>
+          <div class="card" style="width: 18rem;">
+          <div id="recentSearches"class="card-body">
           </div>
-        </div> -->
+          </div>
+        </div>
       </div>
     </div>
 

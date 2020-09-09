@@ -2,11 +2,13 @@ $(document).ready(() => {
   // $("#rowWrapper").show();
   $("#battlegroundRow").hide();
   $("#battleground").hide();
+
   $(document).on("click", ".fightBtn", function () {
     event.preventDefault();
     // var dataId = $(this).attr("data-id");
     var img = $(this).parent().siblings("#hero_img").attr("src");
     var name = $(this).siblings("#hero_name").text();
+    console.log("name", name);
     var intel = $(this).siblings("#heroInt").text().split(" ")[1];
     var strength = $(this).siblings("#heroStrength").text().split(" ")[1];
     var speed = $(this).siblings("#heroSpeed").text().split(" ")[1];
@@ -109,32 +111,42 @@ $(document).ready(() => {
     // display villain health
     $("#villain-name").text(villain.name);
     $("#villain-health").text(villain.health);
-    if (villain.health < villain.health / 4) {
-      $("#villain-health").attr("style", "color:red");
-    }
+    // if (villain.health < villain.health / 4) {
+    //   $("#villain-health").attr("style", "color:red");
+    // }
   }
   function attack(hero, villain) {
     var hero_attack = Math.floor((Math.random() * hero.attack) / 2 + 5);
     $("#attack-button").hide();
     villain.health -= hero_attack;
     $("#villain-health").text(villain.health);
-    if (villain.health <= 0) {
+    // if (villain.health <= 0) {
+    //   $("#villain-health").text("0");
+    //   $("#gameMessageHero").append(
+    //     `\n${hero.name} IS VICTORIOUS! UNIVERSE SAVED`
+    //   );
+    //   $("#attack-button").hide();
+    //   $(".hideMe").show();
+    // }
+    if (hero_attack === 0 && villain.health > 0) {
+      $("#gameMessageHero").text(`${hero.name} missed! No damage dealt`);
+    } else if (hero_attack >= hero.attack / 2 && villain.health > 0) {
+      $("#gameMessageHero").text(
+        `${hero.name} hit for ${hero_attack}, a critical hit`
+      );
+    } else if (hero_attack < hero.attack / 2 && villain.health > 0) {
+      $("#gameMessageHero").text(`${hero.name} hit for ${hero_attack} damage`);
+    } else if (hero_attack < hero.attack / 2 && villain.health <= 0) {
       $("#villain-health").text("0");
-      $("#gameMessageHero").text(`${hero.name} IS VICTORIOUS! UNIVERSE SAVED`);
+      $("#gameMessageHero").text(
+        `${hero.name} hit for ${hero_attack} damage and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
+      );
       $("#attack-button").hide();
       $(".hideMe").show();
 
       return;
     }
-    if (hero_attack === 0) {
-      $("#gameMessageHero").text(`${hero.name} missed! No damage dealt`);
-    } else if (hero_attack >= hero.attack / 2) {
-      $("#gameMessageHero").text(
-        `${hero.name} hit for ${hero_attack}, a critical hit`
-      );
-    } else {
-      $("#gameMessageHero").text(`${hero.name} hit for ${hero_attack} damage`);
-    }
+
     console.log(hero_attack);
 
     setTimeout(() => {
@@ -142,10 +154,31 @@ $(document).ready(() => {
       hero.health -= villain_attack;
       $("#hero-health").text(hero.health);
 
-      if (hero.health <= 0) {
+      // if (hero.health <= 0) {
+      //   $("#hero-health").text("0");
+      //   $("#gameMessageHero").text(
+      //     `${villain.name} IS VICTORIOUS! YOU HAVE FAILED TO SAVE THE UNIVERSE`
+      //   );
+      //   $("#attack-button").hide();
+      //   $(".hideMe").show();
+
+      //   return;
+      // }
+
+      if (villain_attack === 0 && hero.health > 0) {
+        $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
+      } else if (villain_attack >= villain.attack / 2 && hero.health > 0) {
+        $("#gameMessageHero").text(
+          `${villain.name} hit for ${villain_attack}, a critical hit`
+        );
+      } else if (villain_attack < villain.attack / 2 && hero.health > 0) {
+        $("#gameMessageHero").text(
+          `${villain.name} hit for ${villain_attack} damage`
+        );
+      } else if (villain_attack < villain.attack / 2 && hero.health <= 0) {
         $("#hero-health").text("0");
         $("#gameMessageHero").text(
-          `${villain.name} IS VICTORIOUS! YOU HAVE FAILED TO SAVE THE UNIVERSE`
+          `${villain.name} hit for ${villain_attack} damage and IS VICTORIOUS! YOU HAVE FAILED TO SAVE THE UNIVERSE!`
         );
         $("#attack-button").hide();
         $(".hideMe").show();
@@ -153,17 +186,17 @@ $(document).ready(() => {
         return;
       }
 
-      if (villain_attack === 0) {
-        $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
-      } else if (villain_attack >= villain.attack / 2) {
-        $("#gameMessageHero").text(
-          `${villain.name} hit for ${villain_attack}: a critical hit`
-        );
-      } else {
-        $("#gameMessageHero").text(
-          `${villain.name} hit for ${villain_attack} damage`
-        );
-      }
+      // if (villain_attack === 0) {
+      //   $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
+      // } else if (villain_attack >= villain.attack / 2) {
+      //   $("#gameMessageHero").text(
+      //     `${villain.name} hit for ${villain_attack}: a critical hit`
+      //   );
+      // } else {
+      //   $("#gameMessageHero").text(
+      //     `${villain.name} hit for ${villain_attack} damage`
+      //   );
+      // }
 
       console.log("villain attack: ", villain_attack);
 

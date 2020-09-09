@@ -1,13 +1,40 @@
 $(document).ready(() => {
+  var heroArr = [];
+
+  // delete hero from database
+  $(document).on("click", ".deleteBtn", function () {
+    event.preventDefault();
+    var delHero = $(this).siblings("#hero_name").text();
+    console.log("delHero: ", delHero);
+    var confirmDel = confirm(
+      `Are you sure you want to delete ${delHero} from your universe?`
+    );
+    if (confirmDel) {
+      $.ajax({
+        url: "/api/hero_data/" + delHero,
+        method: "DELETE",
+      }).then(function () {
+        console.log("delete successful");
+        alert(`${delHero} was succesfully deleted from the universe...`);
+        window.location.reload();
+      });
+    } else {
+      // alert(
+      //   `${delHero} will not be deleted and continue protecting the universe!`
+      // );
+    }
+  });
+
   //make a call to our api-routes to search our heros database and return the data for ALL heroes
   var baseUrl = "/api/hero_data";
   $.get(baseUrl).then((response) => {
-    // console.log("All our heroes: ", response);
+    console.log("All our heroes: ", response);
     // console.log("Hero array length: ", response.length);
 
     var newRow = $("#rowWrapper");
 
     for (var i = 0; i < response.length; i++) {
+      heroArr.push(response[i]);
       var newCol = $("<div class='col mt-4'>");
       var heroCard = $("<div class='card'>");
       var heroImg = $(
@@ -29,6 +56,10 @@ $(document).ready(() => {
         "Fight!"
       );
       fightBtn.attr("data-id", i);
+      var deleteBtn = $("<button class='btn btn-secondary deleteBtn'>").text(
+        "Delete"
+      );
+      deleteBtn.attr("data-delete", i);
 
       heroCard.append(heroImg);
       heroImg
@@ -67,11 +98,13 @@ $(document).ready(() => {
       heroBody.append(heroCombat);
 
       heroBody.append(fightBtn);
+      heroBody.append(deleteBtn);
 
       heroCard.append(heroBody);
       newCol.append(heroCard);
       newRow.append(newCol);
     }
+    console.log("heroArr: ", heroArr);
   });
 
   var baseUrl = "/api/villain_data";
