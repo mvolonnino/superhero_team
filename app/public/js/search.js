@@ -47,9 +47,10 @@ $(document).ready(() => {
         console.log("HERO RESULTS: ", results);
         if (results.type === "error") {
           console.log("Hero does not exist in this universe's source");
-          $("#heroResults").hide();
+          // $("#heroResults").hide();
+          $("#superheroSearch").val("");
           alert(
-            "This hero may not exist in the multiverse.... Check spelling or search again!"
+            "This hero may not have enough information or exist in the multiverse.... Check spelling or search again!"
           );
         } else {
           renderHero();
@@ -71,6 +72,7 @@ $(document).ready(() => {
           for (var i = 0; i < values.length; i++) {
             total_power += parseInt(values[i]);
           }
+          console.log("type of total power:", total_power);
           let imgURL = results[0].image.url;
           let imgTag = $("#hero_img");
           imgTag.attr("src", imgURL);
@@ -81,8 +83,16 @@ $(document).ready(() => {
           $("#hero_occupation").text("Occupation: " + occupation);
           $("#hero_publisher").text("Publisher: " + publisher);
           $("#hero_total_power").text("Power Level: " + total_power);
-          let addHero = $("#addHero");
-          addHero.addClass("d-block");
+          if (results[0].powerstats.intelligence === "null") {
+            alert(
+              "Not enough stats on this hero, wont be able to be added to universe"
+            );
+            let addHero = $("#addHero");
+            addHero.removeClass("d-block");
+          } else {
+            let addHero = $("#addHero");
+            addHero.addClass("d-block");
+          }
         }
       });
     }
@@ -93,6 +103,7 @@ $(document).ready(() => {
     $("#addedHero").remove();
     var supeName = $("#superheroSearch").val().trim().toLowerCase().split(" ");
     console.log("supeName:", supeName);
+    $("#superheroSearch").val("");
     var superFinal = "";
 
     if (supeName.length === 1) {
