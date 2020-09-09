@@ -112,7 +112,7 @@ router.get("/hero/:name", (req, res) => {
     // }
 
     body = JSON.parse(body);
-
+    console.log("LOOOOOOOOOK ATTT MEEEE: ", body.results);
     if (body.results === undefined) {
       console.log("==================================================");
       console.log("Error!! Superhero does not exist");
@@ -121,34 +121,28 @@ router.get("/hero/:name", (req, res) => {
         message: "Hero does not exist in this universe's source",
       });
     }
-    var results = body.results.filter((hero) => {
-      return hero.name.toLowerCase() === req.params.name.toLowerCase();
-    });
-    // console.log("**********results: ", results);
+    // to handle when searched name does not match exactly to the superhero api
+    for (var i = 0; i < body.results.length; i++) {
+      if (body.results[i].name.toLowerCase() != req.params.name.toLowerCase()) {
+        console.log("names do not match exactly");
+      } else {
+        console.log("body.results[i].name", body.results[i].name);
+        var results = body.results.filter((hero) => {
+          return hero.name.toLowerCase() === req.params.name.toLowerCase();
+        });
+      }
+    }
+
+    if (results === undefined) {
+      return res.json({
+        type: "error",
+        message: "searched name does not match the exact name in superhero api",
+      });
+    }
+
     // grabbing information on the hero searched
     res.json(results);
-
-    console.log("hero: ", results);
-    var heroName = results[0].name;
-    console.log("heroName: ", heroName);
-    var alignment = results[0].biography.alignment;
-    var hero_id = results[0].id;
-    var imageURL = results[0].image.url;
-    // console.log("imageURL: ", imageURL);
-    var powerstats = results[0].powerstats;
-    // console.log("powerstats: ", powerstats);
-    const stats = powerstats;
-    const keys = Object.keys(stats);
-    const values = Object.values(stats);
-    const entries = Object.entries(stats);
-    var total_power = 0;
-    for (var i = 0; i < values.length; i++) {
-      total_power += parseInt(values[i]);
-    }
   });
-  // .catch(function (error) {
-  // console.log("SUPERHERO DOES NOT EXIST: ", error);
-  // });
 });
 
 router.post("/hero/:name", (req, res) => {
@@ -193,9 +187,9 @@ router.post("/hero/:name", (req, res) => {
     var powerstats = results[0].powerstats;
     // console.log("powerstats: ", powerstats);
     var stats = powerstats;
-    var keys = Object.keys(stats);
+    // var keys = Object.keys(stats);
     var values = Object.values(stats);
-    var entries = Object.entries(stats);
+    // var entries = Object.entries(stats);
     var total_power = 0;
     for (var i = 0; i < values.length; i++) {
       total_power += parseInt(values[i]);
