@@ -6,16 +6,17 @@ $(document).ready(() => {
     $(".member-name").text(data.email);
   });
 
-  // function recentSearches() {
-  //   for (var i = 0; i < recentSearchArr.length; i++) {
-  //     var pTag = $("<p>");
-  //     pTag.addClass("card-text");
-  //     pTag.text(recentSearchArr[i]);
-  //     console.log("recentSearchArr[i]: ", recentSearchArr[i]);
-  //     $("#recentSearches").appened(pTag);
-  //   }
-  // }
-  // recentSearches();
+  function recentSearches(supeName) {
+    for (var i = 0; i < recentSearchArr.length; i++) {
+      var pTag = $("<li>");
+      pTag.addClass("card-text");
+      pTag.text(recentSearchArr[i].join(" "));
+      console.log("recentSearchArr[i]: ", recentSearchArr[i]);
+      if (recentSearchArr[i] === supeName) {
+        $("#recentSearches").prepend(pTag);
+      }
+    }
+  }
 
   $("#searchBtn").on("click", (event) => {
     event.preventDefault();
@@ -46,13 +47,14 @@ $(document).ready(() => {
         console.log("HERO RESULTS: ", results);
         if (results.type === "error") {
           console.log("Hero does not exist in this universe's source");
-          $("#heroResultsCol").hide();
+          $("#heroResults").hide();
           alert(
             "This hero may not exist in the multiverse.... Check spelling or search again!"
           );
         } else {
           renderHero();
-          $("#heroResultsCol").show();
+          $("#heroResults").show();
+          recentSearches(supeName);
         }
         function renderHero() {
           // grabbing informatoin based on search results
