@@ -36,21 +36,6 @@ $(document).ready(() => {
     passwordInput.val("");
   });
 
-  // Does a post to the signup route. If successful, we are redirected to the members page
-  // Otherwise we log any errors
-
-  // async await example
-  // const signUp = async (email, password) => {
-  //   try {
-  //     const signedUp = await $.post("/api/signup", {
-  //       email: email,
-  //       password,
-  //     });
-  //   } catch (err) {
-  //     console.error("error: ", error);
-  //   }
-  // };
-
   // promise example
   const signUp = (email, password) => {
     return new Promise((resolve, reject) => {
@@ -77,22 +62,8 @@ $(document).ready(() => {
     });
   };
 
-  // function signUpUser(email, password) {
-  //   $.post("/api/signup", {
-  //     email: email,
-  //     password: password,
-  //   })
-  //     .then(() => {
-  //       window.location.replace("/members");
-  //       // If there's an error, handle it by throwing up a bootstrap alert
-  //     })
-  //     .catch((err) => handleLoginErr(err));
-  // }
-
   function handleLoginErr(err) {
     $("#alert .msg").text(err);
-
-    // $("#alert .msg").text(err.responseText.errors[0].message);
     $("#alert").fadeIn(500);
   }
 });

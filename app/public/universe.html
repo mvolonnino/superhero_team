@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="Description" content="Enter your description here" />
+    <!-- google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
@@ -13,7 +18,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/universe.css" />
+    <link rel="stylesheet" href="assets/css/universe.css" />
     <title>Your Universe</title>
   </head>
   <body>
@@ -46,9 +51,9 @@
             <h2 class="card-title">
               Choose your hero to fight against the evils of the multiverse!
             </h2>
-            <h5 class="card-title">
-              <span class="villain"></span> is approaching fast...
-            </h5>
+            <h4 class="card-title">
+              <span class="villain marker"></span> is approaching fast...
+            </h4>
             <p class="card-text">
               Read your heroes stats wisely. When you click "fight" that will
               send your hero into battle against a villain that threatens the
@@ -87,7 +92,7 @@
               id="hero_img"
             />
             <div id="card_body" class="card-body">
-              <h5 id="hero_name" class="card-title"></h5>
+              <h5 id="hero_name" class="card-title marker"></h5>
               <hr />
               <p id="hero_alignment" class="card-text mb-1"></p>
               <p id="hero_total_power" class="card-text mb-1"></p>
@@ -101,7 +106,7 @@
         </div>
         <div class="col-lg">
           <div class="card" style="width: 18rem">
-            <h2 class="card-title mt-2">The Battlegrounds</h2>
+            <h2 class="card-title mt-2 marker">The Battlegrounds</h2>
             <div id="game" class="card-body">
               <h4 class="card-text">
                 <span id="hero-name"></span> Health:
@@ -134,7 +139,7 @@
               id="villainImg"
             />
             <div id="card_body" class="card-body">
-              <h5 id="villainName" class="card-title"></h5>
+              <h5 id="villainName" class="card-title marker"></h5>
               <hr />
               <p id="villain_alignment" class="card-text mb-2"></p>
               <p id="villain_total_power" class="card-text mb-2"></p>

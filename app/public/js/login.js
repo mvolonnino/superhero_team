@@ -33,7 +33,19 @@ $(document).ready(() => {
         // If there's an error, log the error
       })
       .catch((err) => {
-        console.log(err);
+        const { status, responseText } = err;
+        // console.log(err);
+        console.log("status: ", status);
+        console.log("responseText: ", responseText);
+
+        if (responseText === "Unauthorized") {
+          return handleLoginErr("Username or Password is incorrect");
+        }
       });
+  }
+
+  function handleLoginErr(err) {
+    $("#alert .msg").text(err);
+    $("#alert").fadeIn(500);
   }
 });

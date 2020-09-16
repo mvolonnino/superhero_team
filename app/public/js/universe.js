@@ -41,7 +41,7 @@ $(document).ready(() => {
         "<img src='' alt='' class='card-img-top img-thumbnail' id='hero_img'>"
       );
       var heroBody = $("<div id='card_body' class='card-body'>");
-      var heroName = $("<h5 id='hero_name'class='card-title'>");
+      var heroName = $("<h5 id='hero_name'class='card-title marker'>");
       var heroTotalPower = $("<p id='heroTotalPower' class = 'card-text'>");
       var heroAlignment = $("<p id='heroAlignment' class = 'card-text'>");
       var heroInt = $("<p id='heroInt'class='card-text' >");
@@ -104,7 +104,7 @@ $(document).ready(() => {
       newCol.append(heroCard);
       newRow.append(newCol);
     }
-    console.log("heroArr: ", heroArr);
+    // console.log("heroArr: ", heroArr);
   });
 
   var baseUrl = "/api/villain_data";
@@ -124,7 +124,7 @@ $(document).ready(() => {
         "<img src='' alt='' class='card-img-top img-thumbnail' id='villain_img'>"
       );
       var heroBody = $("<div id='card_body' class='card-body'>");
-      var heroName = $("<h5 id='villain_name'class='card-title'>");
+      var heroName = $("<h5 id='villain_name'class='card-title marker'>");
       var heroTotalPower = $("<p id='villainTotalPower' class = 'card-text'>");
       var heroAlignment = $("<p id='villainAlignment' class = 'card-text'>");
       var heroInt = $("<p id='villainIntel'class='card-text' >");
