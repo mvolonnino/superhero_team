@@ -132,6 +132,10 @@ $(document).ready(() => {
       $("#gameMessageHero").text(`${hero.name} missed! No damage dealt`);
     } else if (hero_attack >= hero.attack / 2 && villain.health > 0) {
       $("#gameMessageHero").text(
+        `${hero.name} hit for ${hero_attack}, a critical hit and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
+      );
+    } else if (hero_attack >= hero.attack / 2 && villain.health > 0) {
+      $("#gameMessageHero").text(
         `${hero.name} hit for ${hero_attack}, a critical hit`
       );
     } else if (hero_attack < hero.attack / 2 && villain.health > 0) {
@@ -167,6 +171,10 @@ $(document).ready(() => {
 
       if (villain_attack === 0 && hero.health > 0) {
         $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
+      } else if (villain >= villain.attack / 2 && hero.health > 0) {
+        $("#gameMessageHero").text(
+          `${villain.name} hit for ${villain_attack}, a critical hit and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
+        );
       } else if (villain_attack >= villain.attack / 2 && hero.health > 0) {
         $("#gameMessageHero").text(
           `${villain.name} hit for ${villain_attack}, a critical hit`
