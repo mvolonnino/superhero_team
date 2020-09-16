@@ -1,4 +1,12 @@
 /* ----Navbar---- */
+* {
+  font-family: "Fira Code", monospace;
+}
+
+.marker {
+  font-family: "Permanent Marker", cursive;
+}
+
 .navbar {
   min-height: 80px;
 }

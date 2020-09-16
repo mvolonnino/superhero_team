@@ -239,3 +239,4 @@ $(document).ready(() => {
     this.health = Math.floor(durability * 2.5 + speed + strength);
   }
 });
+
