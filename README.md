@@ -6,11 +6,11 @@ Any fan of superhero movies and comics has at one point wondered who would win i
 
 ## SCREENSHOTS OF APP:
 
-![SEARCH YOUR HERO](app/public/assets/img/Screen%20Shot%202020-09-04%20at%203.45.46%20PM.png)
+![SEARCH YOUR HERO](app/public/assets/img/Screen%20Shot%202020-09-16%20at%201.21.56%20AM.png)
 
-![YOUR UNIVERSE](app/public/assets/img/Screen%20Shot%202020-09-04%20at%203.46.46%20PM.png)
+![YOUR UNIVERSE](app/public/assets/img/Screen%20Shot%202020-09-16%20at%201.22.46%20AM.png)
 
-![SAVE THE UNIVERSE](app/public/assets/img/Screen%20Shot%202020-09-04%20at%203.51.22%20PM.png)
+![SAVE THE UNIVERSE](app/public/assets/img/Screen%20Shot%202020-09-16%20at%201.23.57%20AM.png)
 
 ## HOW TO USE
 
