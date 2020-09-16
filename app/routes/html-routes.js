@@ -30,7 +30,7 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
-  app.get("/universe", function (req, res) {
+  app.get("/universe", isAuthenticated, function (req, res) {
     console.log("get /universe");
     res.sendFile(path.join(__dirname, "../public/universe.html"));
   });
