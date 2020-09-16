@@ -8,15 +8,25 @@ const { sequelize } = require("../models");
 // routes for our heros table==================================================================================
 router.get("/hero_data", (req, res) => {
   //receive call from front-end, enter database and grab all hero data
-  db.Hero.findAll({}).then((allHeroes) => {
-    res.json(allHeroes);
-  });
+  db.Hero.findAll({
+    where: {
+      createdBy: req.user.email,
+    },
+  })
+    .then((allHeroes) => {
+      // console.log("allHeroes: ", allHeroes);
+      res.json(allHeroes);
+    })
+    .catch(function (err) {
+      console.log("err");
+    });
 });
 
 router.delete("/hero_data/:name", (req, res) => {
   db.Hero.destroy({
     where: {
       name: req.params.name,
+      createdBy: req.user.email,
     },
   }).then(function (dbHero) {
     res.json(dbHero);
@@ -112,7 +122,7 @@ router.get("/hero/:name", (req, res) => {
     // }
 
     body = JSON.parse(body);
-    console.log("LOOOOOOOOOK ATTT MEEEE: ", body.results);
+    // console.log("LOOOOOOOOOK ATTT MEEEE: ", body.results);
     if (body.results === undefined) {
       console.log("==================================================");
       console.log("Error!! Superhero does not exist");
@@ -144,7 +154,6 @@ router.get("/hero/:name", (req, res) => {
     res.json(results);
   });
 });
-
 router.post("/hero/:name", (req, res) => {
   console.log("post /api/hero/" + req.params.name);
   console.log("=========================================");
@@ -177,9 +186,9 @@ router.post("/hero/:name", (req, res) => {
     // grabbing information on the hero searched
     // res.json(results);
 
-    console.log("hero: ", results);
+    // console.log("hero: ", results);
     var heroName = results[0].name;
-    console.log("heroName: ", heroName);
+    // console.log("heroName: ", heroName);
     var alignment = results[0].biography.alignment;
     var hero_id = results[0].id;
     var imageURL = results[0].image.url;
@@ -194,13 +203,31 @@ router.post("/hero/:name", (req, res) => {
     for (var i = 0; i < values.length; i++) {
       total_power += parseInt(values[i]);
     }
-    db.Hero.findOne({
+    db.Hero.findAll({
       where: {
-        name: heroName,
+        createdBy: req.user.email,
       },
     }).then(function (dbHero) {
-      if (dbHero === null) {
-       console.log("logging the current user: ", req.user.email)
+      // console.log("dbHero: ", dbHero);
+
+      var nameArr = [];
+      for (var i = 0; i < dbHero.length; i++) {
+        var { name } = dbHero[i];
+        nameArr.push(name);
+      }
+      console.log("nameArr: ", nameArr);
+      console.log("heroName: ", heroName);
+      var match;
+      if (nameArr.includes(heroName)) {
+        // console.log("match");
+        match = true;
+      } else {
+        match = false;
+      }
+      console.log("match: ", match);
+
+      if (dbHero === null || dbHero.length === 0 || match === false) {
+        console.log("logging the current user: ", req.user.email);
         console.log("Will Add Hero....");
         db.Hero.create({
           name: heroName,
@@ -214,20 +241,28 @@ router.post("/hero/:name", (req, res) => {
           total_power: total_power,
           alignment: alignment,
           img_url: imageURL,
-          createdBy: req.user.email
-          
-        }).then(() => {
-          var query = "SELECT * FROM Heros";
-          connection.query(query, function (err, res) {
-            if (err) throw err;
-            console.table(res);
+          createdBy: req.user.email,
+        })
+          .then(() => {
+            var query = "SELECT * FROM Heros ORDER BY createdBy, id desc";
+            connection.query(query, function (err, res) {
+              if (err) throw err;
+              console.table(res);
+            });
+            res.json({ message: "Hero has been added to your universe!" });
+          })
+          .catch(function (err) {
+            console.log("error: ", err);
           });
-          res.json({ message: "Hero has been added to your universe!" });
-        });
       } else {
         console.log("==================================================");
         console.log("Hero is already in database");
         res.json({ message: "Hero already exists in your universe!" });
+        var query = "SELECT * FROM Heros ORDER BY createdBy, id desc";
+        connection.query(query, function (err, res) {
+          if (err) throw err;
+          console.table(res);
+        });
       }
     });
   });

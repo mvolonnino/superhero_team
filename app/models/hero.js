@@ -3,7 +3,6 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     hero_id: DataTypes.INTEGER,
     intel: DataTypes.INTEGER,
@@ -15,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
     total_power: DataTypes.INTEGER,
     alignment: DataTypes.STRING,
     img_url: DataTypes.STRING,
-    createdBy: DataTypes.STRING
+    createdBy: DataTypes.STRING,
   });
   return Hero;
 };
