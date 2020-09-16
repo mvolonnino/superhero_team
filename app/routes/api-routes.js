@@ -200,6 +200,7 @@ router.post("/hero/:name", (req, res) => {
       },
     }).then(function (dbHero) {
       if (dbHero === null) {
+       console.log("logging the current user: ", req.user.email)
         console.log("Will Add Hero....");
         db.Hero.create({
           name: heroName,
@@ -213,6 +214,8 @@ router.post("/hero/:name", (req, res) => {
           total_power: total_power,
           alignment: alignment,
           img_url: imageURL,
+          createdBy: req.user.email
+          
         }).then(() => {
           var query = "SELECT * FROM Heros";
           connection.query(query, function (err, res) {
