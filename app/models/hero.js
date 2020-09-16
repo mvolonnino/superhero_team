@@ -15,6 +15,7 @@ module.exports = function (sequelize, DataTypes) {
     total_power: DataTypes.INTEGER,
     alignment: DataTypes.STRING,
     img_url: DataTypes.STRING,
+    createdBy: DataTypes.STRING
   });
   return Hero;
 };
