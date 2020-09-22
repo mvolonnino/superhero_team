@@ -80,9 +80,25 @@
   margin-top: 6px;
 }
 
-/* container  */
+/* battlegrounds container  */
 .customCSS {
   text-align: -webkit-center;
+}
+
+#relative {
+  position: relative;
+}
+
+#kapow {
+  position: absolute;
+  bottom: 395px;
+  left: 0;
+}
+
+#pow {
+  position: absolute;
+  top: 182px;
+  right: -45px;
 }
 
 /* ----Media Queries---- */

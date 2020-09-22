@@ -1,4 +1,4 @@
-/* ----Navbar---- */
+/* global fonts */
 * {
   font-family: "Fira Code", monospace;
 }
@@ -7,6 +7,7 @@
   font-family: "Permanent Marker", cursive;
 }
 
+/* ----Navbar---- */
 .navbar {
   min-height: 80px;
 }
@@ -69,6 +70,8 @@
 .customBtn {
   margin-top: 4px;
 }
+
+
 
 /* ----Media Queries---- */
 @media screen and (max-width: 641px) {
