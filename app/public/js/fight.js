@@ -32,9 +32,7 @@ $(document).ready(() => {
       parseInt(combat)
     );
 
-    var confirmFight = confirm(
-      `Are you sure you want to use ${name} to fight?`
-    );
+    var confirmFight = confirm(`Are you sure you want to use ${name} to fight?`);
     if (confirmFight) {
       console.log("confirm: ", confirmFight);
       console.log(`${name} will be used to fight`);
@@ -107,40 +105,37 @@ $(document).ready(() => {
       attack(hero, villain);
     });
     $("#hero-name").text(hero.name);
-    $("#hero-health").text(hero.health);
+    $("#hero-health").text(hero.health).attr("style", "color:green");
     // display villain health
     $("#villain-name").text(villain.name);
-    $("#villain-health").text(villain.health);
-    // if (villain.health < villain.health / 4) {
-    //   $("#villain-health").attr("style", "color:red");
-    // }
+    $("#villain-health").text(villain.health).attr("style", "color:green");
   }
   function attack(hero, villain) {
     var hero_attack = Math.floor((Math.random() * hero.attack) / 2 + 5);
     $("#attack-button").hide();
     villain.health -= hero_attack;
+    if (villain.health < 75) {
+      $("#villain-health").attr("style", "color:orange");
+    }
     $("#villain-health").text(villain.health);
-    // if (villain.health <= 0) {
-    //   $("#villain-health").text("0");
-    //   $("#gameMessageHero").append(
-    //     `\n${hero.name} IS VICTORIOUS! UNIVERSE SAVED`
-    //   );
-    //   $("#attack-button").hide();
-    //   $(".hideMe").show();
-    // }
+
     if (hero_attack === 0 && villain.health > 0) {
       $("#gameMessageHero").text(`${hero.name} missed! No damage dealt`);
-    } else if (hero_attack >= hero.attack / 2 && villain.health > 0) {
+    } else if (hero_attack >= hero.attack / 2 && villain.health <= 0) {
       $("#gameMessageHero").text(
         `${hero.name} hit for ${hero_attack}, a critical hit and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
       );
+      $("#villain-health").attr("style", "color:red");
+      $("#villain-health").text("0");
+      $(".hideMe").show();
+
+      return;
     } else if (hero_attack >= hero.attack / 2 && villain.health > 0) {
-      $("#gameMessageHero").text(
-        `${hero.name} hit for ${hero_attack}, a critical hit`
-      );
+      $("#gameMessageHero").text(`${hero.name} hit for ${hero_attack}, a critical hit`);
     } else if (hero_attack < hero.attack / 2 && villain.health > 0) {
       $("#gameMessageHero").text(`${hero.name} hit for ${hero_attack} damage`);
     } else if (hero_attack < hero.attack / 2 && villain.health <= 0) {
+      $("#villain-health").attr("style", "color:red");
       $("#villain-health").text("0");
       $("#gameMessageHero").text(
         `${hero.name} hit for ${hero_attack} damage and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
@@ -156,34 +151,28 @@ $(document).ready(() => {
     setTimeout(() => {
       var villain_attack = Math.floor((Math.random() * villain.attack) / 2 + 5);
       hero.health -= villain_attack;
+      if (hero.health < 75) {
+        $("#hero-health").attr("style", "color:orange");
+      }
       $("#hero-health").text(hero.health);
-
-      // if (hero.health <= 0) {
-      //   $("#hero-health").text("0");
-      //   $("#gameMessageHero").text(
-      //     `${villain.name} IS VICTORIOUS! YOU HAVE FAILED TO SAVE THE UNIVERSE`
-      //   );
-      //   $("#attack-button").hide();
-      //   $(".hideMe").show();
-
-      //   return;
-      // }
 
       if (villain_attack === 0 && hero.health > 0) {
         $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
-      } else if (villain >= villain.attack / 2 && hero.health > 0) {
+      } else if (villain_attack >= villain.attack / 2 && hero.health <= 0) {
+        $("#hero-health").attr("style", "color:red");
+        $("#hero-health").text("0");
         $("#gameMessageHero").text(
           `${villain.name} hit for ${villain_attack}, a critical hit and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
         );
+        $(".hideMe").show();
+
+        return;
       } else if (villain_attack >= villain.attack / 2 && hero.health > 0) {
-        $("#gameMessageHero").text(
-          `${villain.name} hit for ${villain_attack}, a critical hit`
-        );
+        $("#gameMessageHero").text(`${villain.name} hit for ${villain_attack}, a critical hit`);
       } else if (villain_attack < villain.attack / 2 && hero.health > 0) {
-        $("#gameMessageHero").text(
-          `${villain.name} hit for ${villain_attack} damage`
-        );
+        $("#gameMessageHero").text(`${villain.name} hit for ${villain_attack} damage`);
       } else if (villain_attack < villain.attack / 2 && hero.health <= 0) {
+        $("#hero-health").attr("style", "color:red");
         $("#hero-health").text("0");
         $("#gameMessageHero").text(
           `${villain.name} hit for ${villain_attack} damage and IS VICTORIOUS! YOU HAVE FAILED TO SAVE THE UNIVERSE!`
@@ -194,18 +183,6 @@ $(document).ready(() => {
         return;
       }
 
-      // if (villain_attack === 0) {
-      //   $("#gameMessageHero").text(`${villain.name} missed! No damage dealt`);
-      // } else if (villain_attack >= villain.attack / 2) {
-      //   $("#gameMessageHero").text(
-      //     `${villain.name} hit for ${villain_attack}: a critical hit`
-      //   );
-      // } else {
-      //   $("#gameMessageHero").text(
-      //     `${villain.name} hit for ${villain_attack} damage`
-      //   );
-      // }
-
       console.log("villain attack: ", villain_attack);
 
       $("#attack-button").show();
@@ -213,18 +190,7 @@ $(document).ready(() => {
   }
 
   // Character Models
-  function Character(
-    img,
-    name,
-    alignment,
-    total_power,
-    intel,
-    strength,
-    speed,
-    power,
-    durability,
-    combat
-  ) {
+  function Character(img, name, alignment, total_power, intel, strength, speed, power, durability, combat) {
     this.img = img;
     this.name = name;
     this.alignment = alignment;
@@ -235,8 +201,7 @@ $(document).ready(() => {
     this.power = power;
     this.durability = durability;
     this.combat = combat;
-    this.attack = intel + power + combat;
-    this.health = Math.floor(durability * 2.5 + speed + strength);
+    this.attack = Math.floor(intel * 1.75 + power + combat * 1.3);
+    this.health = Math.floor(durability * 2.75 + speed * 1.25 + strength);
   }
 });
-

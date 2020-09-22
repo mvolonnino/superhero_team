@@ -6,27 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="Description" content="Enter your description here" />
     <!-- google fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/universe.css" />
     <title>Your Universe</title>
   </head>
   <body>
     <nav class="navbar navbar-dark bg-dark customNavbar shadow-lg">
       <div class="navLeft">
-        <a class="navbar-brand bg-danger fullNav" href="/members">
-          Assemble your Heroes!
-        </a>
+        <a class="navbar-brand bg-danger fullNav" href="/members"> Assemble your Heroes! </a>
       </div>
       <div class="navRight">
         <ul class="navbar-nav navRightLink">
@@ -48,16 +37,11 @@
       <div id="universeMessage" class="row text-center">
         <div class="card headerCard">
           <div class="card-body">
-            <h2 class="card-title">
-              Choose your hero to fight against the evils of the multiverse!
-            </h2>
-            <h4 class="card-title">
-              <span class="villain marker"></span> is approaching fast...
-            </h4>
+            <h2 class="card-title">Choose your hero to fight against the evils of the multiverse!</h2>
+            <h4 class="card-title"><span class="villain marker"></span> is approaching fast...</h4>
             <p class="card-text">
-              Read your heroes stats wisely. When you click "fight" that will
-              send your hero into battle against a villain that threatens the
-              universe.
+              Read your heroes stats wisely. When you click "fight" that will send your hero into battle against a villain
+              that threatens the universe.
             </p>
           </div>
         </div>
@@ -66,15 +50,11 @@
         <div class="row text-center">
           <div class="card headerCard">
             <div class="card-body">
-              <h2 class="card-title">
-                You have arrived at the battlegrounds. Save the universe!
-              </h2>
+              <h2 class="card-title">You have arrived at the battlegrounds. Time to save the universe!</h2>
               <p class="card-text">
-                Stats are as follows: Total Power is a combination of all heroes
-                stats. Attack is a combination of intelligence + power + combat.
-                Health is a combination of durability + strength + speed. Attack
-                power is randomized based on the full attack power available to
-                a hero.
+                Stats are as follows: Total Power is a combination of all heroes stats. Attack is a combination of
+                intelligence + power + combat. Health is a combination of durability + strength + speed. Attack power is
+                randomized based on the full attack power available to a hero.
               </p>
             </div>
           </div>
@@ -85,12 +65,7 @@
       <div id="battlegroundRow" class="row">
         <div id="heroResultsCol" class="col-lg">
           <div id="heroResults" class="card" style="width: 18rem">
-            <img
-              src=""
-              alt=""
-              class="card-img-top img-thumbnail"
-              id="hero_img"
-            />
+            <img src="" alt="" class="card-img-top img-thumbnail" id="hero_img" />
             <div id="card_body" class="card-body">
               <h5 id="hero_name" class="card-title marker"></h5>
               <hr />
@@ -98,13 +73,17 @@
               <p id="hero_total_power" class="card-text mb-1"></p>
               <p id="hero_attack" class="card-text mb-1"></p>
               <p id="hero_health" class="card-text mb-1"></p>
-              <button id="attack-button" onclick="" class="btn btn-danger">
-                Attack!
-              </button>
+              <button id="attack-button" onclick="" class="btn btn-danger">Attack!</button>
             </div>
           </div>
         </div>
-        <div class="col-lg">
+        <div id="relative" class="col-lg">
+          <!-- <img
+            src="./assets/img/kapow.jpg"
+            id="kapow"
+            width="100px"
+            height="100px"
+          /> -->
           <div class="card" style="width: 18rem">
             <h2 class="card-title mt-2 marker">The Battlegrounds</h2>
             <div id="game" class="card-body">
@@ -123,21 +102,18 @@
             </div>
           </div>
           <hr my-4 />
-          <p class="hideMe">
-            The next threat is approaching, rejoin your team and prepare...
-          </p>
-          <button onclick="location.reload()" class="btn btn-danger hideMe">
-            Your Universe
-          </button>
+          <p class="hideMe">The next threat is approaching, rejoin your team and prepare...</p>
+          <button onclick="location.reload()" class="btn btn-danger hideMe">Your Universe</button>
+          <!-- <img
+            src="./assets/img/stock-comic-popart-pow-bubble-bubbles-bubbletext.png"
+            id="pow"
+            width="100px"
+            height="100px"
+          /> -->
         </div>
         <div id="villainResultsCol" class="col-lg">
           <div id="villainResults" class="card" style="width: 18rem">
-            <img
-              src=""
-              alt=""
-              class="card-img-top img-thumbnail"
-              id="villainImg"
-            />
+            <img src="" alt="" class="card-img-top img-thumbnail" id="villainImg" />
             <div id="card_body" class="card-body">
               <h5 id="villainName" class="card-title marker"></h5>
               <hr />
@@ -152,10 +128,7 @@
       </div>
     </div>
     <div class="container-fluid mb-4">
-      <div
-        class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5"
-        id="rowWrapper"
-      >
+      <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5" id="rowWrapper">
         <!-- Dynamically generated columns and card will go here -->
       </div>
       <div id="villainCard" class="row d-none">
