@@ -162,7 +162,7 @@ $(document).ready(() => {
         $("#hero-health").attr("style", "color:red");
         $("#hero-health").text("0");
         $("#gameMessageHero").text(
-          `${villain.name} hit for ${villain_attack}, a critical hit and IS VICTORIOUS, YOU HAVE SAVED THE UNIVERSE!`
+          `${villain.name} hit for ${villain_attack}, a critical hit and IS VICTORIOUS, YOU HAVE FAILED TO SAVE THE UNIVERSE!`
         );
         $(".hideMe").show();
 
